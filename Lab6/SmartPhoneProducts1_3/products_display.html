@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Smart Phone Store</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
+
+    <link href="products-style.css" rel="stylesheet">
+    <script>
+    var hits = 0;
+    var spins = 0; 
+
+
+
+    var age =  48;
+    var fav_num = 7;
+    var day_of_birth = 5;
+    var month_of_birth = 9;
+
+    </script>
+    <!--onload="document.getElementById('hits_span').innerHTML = hits;
+document.getElementById('spins_span').innerHTML = spins;"-->
+</head>
+<body> 
+<!--- Used code sample form Port -->
+   
+    
+    <header>
+        <h1> 
+             Used Smart Phone Store
+        </h1>
+        <p style="text-align: center; font-weight: bold;">
+            Hits:<span id="hits_span">0</span>
+            Spins:<span id="spins_span">0</span>
+            </p>
+            
+    </header>
+    <div>
+        <aside>
+            <div style="font-size:4rem;text-align:center;font-weight: bold;font-style: italic; color: white">
+                We sell from
+                around the globe!
+            </div>
+        </aside>
+
+        <main>
+            <section class="item" onmouseover="this.className='item rotate'; document.getElementById('hits_span').innerHTML = hits;" 
+                onclick="this.className='item'; document.getElementById('spins_span').innerHTML = spins;"
+                 >
+                <h2>HTC</h2>
+                <p>$40.00</p>
+                <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg" alt="HTC Phones">
+            </section>
+
+            <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
+                <h2>Apple</h2>
+                <p>$75.00</p>
+                <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg">
+            </section>
+
+            <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
+                <h2>Nokia</h2>
+                <p>$35.00</p>
+                <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg">
+            </section>
+
+            <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
+                <h2>Samsung</h2>
+                <p>$45.00</p>
+                <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg">
+            </section>
+
+            <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
+                <h2>Blackberry</td>
+                </h2>
+                <p>$10.00</p>
+                <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg">
+            </section>
+            <script>
+                let value = document.getElementById("rotate").className;
+                document.getElementById("item").innerHTML = value;
+                </script>
+
+                <div>
+                    <p id="testVar1">  Here
+                    </p> 
+                    <p id="testVar2"> Other 
+                    </p>
+
+                    <script>
+                        // this is the expression without parentheses
+                        document.getElementById("testVar1").innerHTML = age + fav_num / day_of_birth * month_of_birth;
+                        
+
+                        // this is the expression with parentheses
+
+                        document.getElementById("testVar2").innerHTML = (age + fav_num) / day_of_birth * month_of_birth;
+                  
+                    </script>
+                </div>
+
+        </main>
+    </div>
+
+   
+    <footer>
+        <h1>
+            Your One Stop For Used Phones  <script>document.write(store_name)
+            
+            </script>
+        </h1>
+    </footer>
+</body>
+<script>
+    
+        var store_name = "Alex Marcondes"
+</script>
+
+</html>

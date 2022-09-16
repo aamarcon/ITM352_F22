@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick = "demo.innerHTML = 'Ouch'">hit me </button> 
+
+    <p id="demo"></p>
+    <p>when the button is licked, we output some text in the paragraph with id "demo"</p>
+
+    <script>
+        var mouseClicks = 0, mouseMoves = 1, mouseRatio = 0;
+    </script>
+    <button onclick="mouseClicks++;  mouseRatio = mouseClicks / mouseMoves; 
+            demo2.innerHTML = mouseClicks; ratio.innerHTML = mouseRatio.toFixed(2);"
+            onmousemove="mouseMoves++; mouseRatio = mouseClicks / mouseMoves;
+             moves.innerHTML = mouseMoves; ratio.innerHTML = mouseRatio.toFixed(3)"> hit me</button> 
+
+
+
+    <p id="demo2">0</p>
+    <p id="moves">0</p>
+    <p id="ratio">0</p>
+</body>
+</html>
