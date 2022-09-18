@@ -8,9 +8,15 @@
     <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
 
     <link href="products-style.css" rel="stylesheet">
+
     <script>
+
+        
+    var store_name = "Alex Marcondes"
+
     var hits = 0;
     var spins = 0; 
+
 
 
 
@@ -18,10 +24,15 @@
     var fav_num = 7;
     var day_of_birth = 5;
     var month_of_birth = 9;
+    var first_name = "Alexandre";
+    var last_name = "Marcondes";
+        
+
+
 
     </script>
     <!--onload="document.getElementById('hits_span').innerHTML = hits;
-document.getElementById('spins_span').innerHTML = spins;"-->
+    document.getElementById('spins_span').innerHTML = spins;"-->
 </head>
 <body> 
 <!--- Used code sample form Port -->
@@ -29,11 +40,15 @@ document.getElementById('spins_span').innerHTML = spins;"-->
     
     <header>
         <h1> 
-             Used Smart Phone Store
+             Used Smart Phone Store  <b> <script style="font-size: 4rem; font-weight: bold;">document.write(first_name) </script></b> 
+                                             <i style="font-size: 4rem;"> <script> document.write(' ') + document.write(last_name)</script> </i>   
+                                    
+
         </h1>
         <p style="text-align: center; font-weight: bold;">
-            Hits:<span id="hits_span">0</span>
-            Spins:<span id="spins_span">0</span>
+            hits:<span id="hits_span">0</span>
+            spins:<span id="spins_span">0</span>
+            Hit/Spin:<span id="hit_spin_span">0</span>
             </p>
             
     </header>
@@ -46,8 +61,8 @@ document.getElementById('spins_span').innerHTML = spins;"-->
         </aside>
 
         <main>
-            <section class="item" onmouseover="this.className='item rotate'; document.getElementById('hits_span').innerHTML = hits;" 
-                onclick="this.className='item'; document.getElementById('spins_span').innerHTML = spins;"
+            <section class="item" onmouseover="this.className='item rotate'; hits_span.innerHTML = hits++;" 
+                onclick="this.className='item'; spins_span.innerHTML = spins++;"
                  >
                 <h2>HTC</h2>
                 <p>$40.00</p>
@@ -60,7 +75,13 @@ document.getElementById('spins_span').innerHTML = spins;"-->
                 <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg">
             </section>
 
-            <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
+            <section class="item" onmouseover="this.className='item rotate';
+                            hits_span.innerHTML = hits++;
+                            hit_spin_span.innerHTML = (hits/spins).toFixed(2);"
+                            
+                            onclick="this.className='item';
+                            spins_span.innerHTML = spins++;
+                            hit_spin_span.innerHTML = (hits/spins).toFixed(2);">
                 <h2>Nokia</h2>
                 <p>$35.00</p>
                 <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg">
@@ -106,16 +127,24 @@ document.getElementById('spins_span').innerHTML = spins;"-->
 
    
     <footer>
+        
         <h1>
-            Your One Stop For Used Phones  <script>document.write(store_name)
-            
+             <script>
+             var line =1;
+             var now = new Date();
+             var h = ((now.getHours()+ 11) % 12) + 1;
+             var AM_PM = (h<12)?'AM':'PM';
+             
+             document.write(`<table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+                <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0] + '. ' + last_name[0] +'.'}'s</h1></th></tr>
+                <tr><td>${line++}.</td><td><br />Copyright @ ${first_name + ' ' + last_name}</td></tr>
+                <tr><td>${line++}.</td><td>${now.getFullYear()}</td></tr>
+                <tr><td>${line}.</td><td>${ h + ':' + now.getMinutes() + ' ' + AM_PM }</td></tr>
+            </table> `)
             </script>
+
         </h1>
     </footer>
 </body>
-<script>
-    
-        var store_name = "Alex Marcondes"
-</script>
 
 </html>

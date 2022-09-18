@@ -156,7 +156,7 @@ section p {
 
 .rotate img
 {
-  animation: rotation .3s infinite linear;
+  animation: rotation .1s infinite linear;
 }
 
 @keyframes rotation {
