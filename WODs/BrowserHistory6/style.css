@@ -1,0 +1,55 @@
+body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 50px;
+    font-family: "open sans-serif";
+    background-color: black;
+    color: yellow;
+
+
+}
+
+h1, h2 {
+
+   font-family: "Oswald";
+   margin: 0;
+}
+
+/* h1, h2, p {
+   color: blue;
+} */
+
+img {
+   float: left;
+   margin-right: 20px;
+}
+body > p {
+   width: 950px;
+}
+/* 
+.wherebrowis {
+    display:flex;
+} */
+
+/* .wherebrowis > div {
+    width: 300px;
+    margin-right: 30px;
+
+} */
+
+ul {
+    display: flex;
+    margin-left: 0px;
+    padding-left: 0px;
+
+}
+
+ul > li {
+    width: 40px;
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-right: 120px;
+    list-style: none;
+
+}
