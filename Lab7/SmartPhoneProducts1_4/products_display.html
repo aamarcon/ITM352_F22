@@ -26,7 +26,21 @@
     var month_of_birth = 9;
     var first_name = "Alexandre";
     var last_name = "Marcondes";
+
+    var over_half = false;
+    var progress = "";
+    
         
+
+    
+            //  if (spins < hits * 2 && over_half == false){
+            //         win_span.innerHTML = true;
+            //     } 
+            //     else { win_span.innerHTML = false;
+            //             over_half = true;
+            //             win_span.innerHTML = over_half}"
+
+
 
 
 
@@ -50,6 +64,12 @@
             hits:<span id="hits_span">0</span>
             spins:<span id="spins_span">0</span>
             Hit/Spin:<span id="hit_spin_span">0</span>
+            You Win: <span id="win_span">pending</span>
+            over_half <span id="over_half">pending</span>
+            
+            
+
+        
             </p>
             
     </header>
@@ -62,9 +82,67 @@
         </aside>
 
         <main>
-            <section class="item" onmouseover="this.className='item rotate'; hits_span.innerHTML = hits++;" 
-                onclick="this.className='item'; spins_span.innerHTML = spins++;"
-                 >
+            <section class="item" onmouseover="
+                
+                if (this.className =='item' ){
+                    this.className = 'item rotate';
+                    spins++;
+                    spins_span.innerHTML = spins;
+                    ratio = hits/spins;
+                    hit_spin_span.innerHTML = ratio.toFixed(2);
+
+                } 
+                hits_spins_ratio = hits/spins;
+                if(hits_spins_ratio <= .25 && hits < spins){
+                    win_span.innerHTML = 'You win!';
+                }
+                else if(hits_spin_ratio <= .5){
+                    win_span.innerHTML = 'Almost there!';
+                }
+                else if(hits_spin_ratio <= .90){
+                    win_span.innerHTML = 'On your way!';
+                }
+                else {
+                    win_span.innerHTML = 'Get going';
+                }"
+
+                onclick="
+                if (this.className !='item')  // already rotating. make stop and increment hits.
+                {
+                    this.className = 'item';
+                    hits++;
+                    hits_span.innerHTML = hits;
+                    ratio = hits/spins;
+                    hit_spin_span.innerHTML = ratio.toFixed(2);
+
+                }
+                else {
+                    this.className = 'item rotate';
+                    spin++;
+                    spins_span.innerHTML = spins;
+                    ratio = hits/spins;
+                    hit_spin_span.innerHTML = ratio.toFixed(2)
+
+
+                }
+                hits_spins_ratio = hits/spins;
+                if(hits_spins_ratio <= .25 && hits < spins){
+                    win_span.innerHTML = 'You win!';
+                }
+                else if(hits_spin_ratio <= .5){
+                    win_span.innerHTML = 'Almost there!';
+                }
+                else if(hits_spin_ratio <= .90){
+                    win_span.innerHTML = 'On your way!';
+                }
+                else {
+                    win_span.innerHTML = 'Get going';
+                }">
+
+                
+
+
+
                 <h2>HTC</h2>
                 <p>$40.00</p>
                 <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg" alt="HTC Phones">
