@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice 2 </title>
+
+    <script>
+        /* THIS IS A INVOICE THAT CALCULATES THE TAX 
+        AND TOTAL OF 5 PRODUCTS 
+        THIS IS A MULTIPLE LINE COMMENT */
+
+        // Product Data 
+
+         // Product 1
+     var item1 = 'Gillette Sensor 3 Razor';
+     var quantity1 = 2;
+     var price1 = 1;
+    var extended_price1 = quantity1 * price1; // Compute extended prices
+
+      // Product 2
+      var item2 = 'Pillow';
+     var quantity2 = 4;
+     var price2 = 5;
+     var extended_price2 = quantity2 * price2 // Compute extended prices
+
+      // Product 3
+      var item3 = 'basketball';
+     var quantity3 = 3;
+     var price3 = 5;
+     var extended_price3 = quantity3 * price3; // Compute extended prices
+
+      // Product 4
+      var item4 = 'Eraser';
+     var quantity4 = 1;
+     var price4 = 3;
+     var extended_price4 = quantity4 * price4; // Compute extended prices
+     
+      // Product 5
+      var item5 = 'Phone';
+     var quantity5 = 2;
+     var price5 = 1;
+     var extended_price5 = quantity5 * price5; // Compute extended prices
+        // calculates subtotal 
+        
+     var subtotal = (extended_price1 + extended_price2+ extended_price3+ extended_price4+extended_price5);
+        //calculates taxes
+     var taxes = (extended_price1 + extended_price2+ extended_price3+ extended_price4+extended_price5) * .0575;
+    
+
+     var shipping_cost = 0
+        // calculates the shipping cost dependent on price 0-50/ 50-99/ 100+
+        if(subtotal < 50){
+            shipping_cost = 2;
+
+        }else if(subtotal < 100){
+            shipping_cost = 5;
+        }
+        else {
+            shipping_cost = (subtotal * .05);
+        }
+
+            // calculates the total adding taxes and subtotal.
+     var total = subtotal + taxes + shipping_cost;
+
+    </script>
+</head>
+<body>
+
+    <table border="2">
+        <tbody>
+          <tr>
+            <th style="text-align: center;" width="43%">Item</th>
+            <th style="text-align: center;" width="11%">quantity</th>
+            <th style="text-align: center;" width="13%">price</th>
+            <th style="text-align: center;" width="54%">extended price</th>
+          </tr>
+          <tr> <!--Products and price in the row ot the table-->
+            <td width="43%"><script>document.write(item1)</script></td>
+            <td align="center" width="11%"><script>document.write(quantity1)</script></td>
+            <td width="13%"><script>document.write(price1)</script></td>
+            <td width="54%"><script>document.write(extended_price1.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td width="43%"><script>document.write(item2)</script></td>
+            <td align="center" width="11%"><script>document.write(quantity2)</script></td>
+            <td width="13%"><script>document.write(price2)</script></td>
+            <td width="54%"><script>document.write(extended_price2.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td width="43%"><script>document.write(item3)</script></td>
+            <td align="center" width="11%"><script>document.write(quantity3)</script></td>
+            <td width="13%"><script>document.write(price3)</script></td>
+            <td width="54%"><script>document.write(extended_price3.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td width="43%"><script>document.write(item4)</script></td>
+            <td align="center" width="11%"><script>document.write(quantity4)</script></td>
+            <td width="13%"><script>document.write(price4)</script></td>
+            <td width="54%"><script>document.write(extended_price4.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td width="43%"><script>document.write(item5)</script></td>
+            <td align="center" width="11%"><script>document.write(quantity5)</script></td>
+            <td width="13%"><script>document.write(price5)</script></td>
+            <td width="54%"><script>document.write(extended_price5.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td colspan="4" width="100%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+            <td width="54%"><script>document.write(subtotal.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span></td>
+            <td width="54%"><script>document.write(taxes.toFixed(2))</script></td>
+          </tr>
+          <tr>
+            <tr>
+                <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Shipping</span></td>
+                <td width="54%"><script>document.write(shipping_cost.toFixed(2))</script></td>
+              </tr>
+              <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+            <td width="54%"><strong><script>document.write(total.toFixed(2))</script></strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    
+</body>
+</html>
