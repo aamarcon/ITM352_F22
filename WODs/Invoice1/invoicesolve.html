@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice1</title>
+    <script>
+    /* THIS IS AN INVOCE PROGRAM
+        IT WILL MAKE CALCULATION FOR AN INVICE.
+        THERE ARE FIVE PRODUCTS IN THIS INVOICE. 
+        IT WILL ALSO GIVE A SUB-TOTAL AND CALCULATE TAXES. 
+        */
+
+
+ //Product Data
+
+         // Product 1
+    var item1 = 'Gillette Sensor 3 Razor';
+    var quantity1 = 2;
+    var price1 = 1.23;
+    var extended_price1 = quantity1 * price1;
+
+        // Product 2
+    var item2 = 'Phone';
+    var quantity2 = 5;
+    var price2 = 35.87;
+    var extended_price2  = quantity2 * price2;
+       // Product 3
+    var item3 = 'Pillow';
+    var quantity3 = 4;
+    var price3 = 11.23;
+    var extended_price3 = quantity3 * price3;
+       // Product 4
+    var item4 = 'soup';
+    var quantity4 = 12;
+    var price4 = 0.68;
+    var extended_price4 = quantity4 * price4;
+       // Product 5
+    var item5 = 'Back-pack';
+    var quantity5 = 1;
+    var price5 = 99.99;
+    var extended_price5 = quantity5 * price5;
+
+    //Sub total for the invoce1
+    var sub_total= (extended_price1 + extended_price2 + extended_price3 +  extended_price4 + extended_price5);
+
+    // calculate sales tax
+    var sales_tax = (extended_price1 + extended_price2 + extended_price3 +  extended_price4 + extended_price5) *.0575;
+
+    // Total of Invoice
+
+    var total = sub_total + sales_tax;
+
+
+    
+
+
+    </script>
+</head>
+<body>
+ <table border="2">
+  <tbody>
+    <tr>
+      <th style="text-align: center;" width="43%">Item</th>
+      <th style="text-align: center;" width="11%">Quantity</th>
+      <th style="text-align: center;" width="13%">Price</th>
+      <th style="text-align: center;" width="54%">Extended Price</th>
+    </tr> 
+    <tr>
+        <td style="text-align: center;" width="43%">Item</th>
+        <td style="text-align: center;" width="11%">Quantity</th>
+        <td style="text-align: center;" width="13%">Price</th>
+        <td style="text-align: center;" width="54%">Extended Price</th>
+      </tr> 
+
+    <script>
+    
+    </script>
+    
+</body>
+</html>
