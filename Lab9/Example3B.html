@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table 3B</title>
+
+
+    <script>
+
+        // CODE FOR EXERCISE 3B
+
+product_quantity = [2, 3, 4, 5, 6]
+
+
+products = [
+ { 'name': 'small gumball', 'price': 0.02 },
+ { 'name': 'medium gumball', 'price': 0.05 },
+ { 'name': 'large gumball', 'price': 0.07 },
+ { 'name': 'small jawbreaker', 'price': 0.06 },
+ { 'name': 'large jawbreaker', 'price': 0.10 }
+];
+
+extended_price1 = product_quantity[0] * products[0].price;
+extended_price2 = product_quantity[1] * products[1].price;
+extended_price3 = product_quantity[2] * products[2].price;
+extended_price4 = product_quantity[3] * products[3].price;
+extended_price5 = product_quantity[4] * products[4].price;
+
+document.write (`<table style="border: 1px solid black;text-align: center;">`)
+
+document.write (`<tr style="border: 1px solid black;"><th style="border: 1px solid black;">Name</th><th>Price</th><th>Quantity</th><th>Extended Cost</th></tr>`)
+for (let i = 0; i < products.length; i ++){
+  document.write(`<tr style="border: 1px solid black;"><td style="border: 1px solid black;">${products[i].name}</td><td>${products[i].price}</td><td>${product_quantity[i]}</td><td>${eval('extended_price'+(i+1)).toFixed(2)}</td></tr>`)
+};
+document.write(`</table>`)
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
