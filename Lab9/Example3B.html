@@ -17,25 +17,39 @@ product_quantity = [2, 3, 4, 5, 6]
 products = [
  { 'name': 'small gumball', 'price': 0.02 },
  { 'name': 'medium gumball', 'price': 0.05 },
- { 'name': 'large gumball', 'price': 0.07 },
+ { 'name': 'large gumball', 'price': 0.09 },
  { 'name': 'small jawbreaker', 'price': 0.06 },
  { 'name': 'large jawbreaker', 'price': 0.10 }
 ];
 
-extended_price1 = product_quantity[0] * products[0].price;
-extended_price2 = product_quantity[1] * products[1].price;
-extended_price3 = product_quantity[2] * products[2].price;
-extended_price4 = product_quantity[3] * products[3].price;
-extended_price5 = product_quantity[4] * products[4].price;
+// extended_price1 = product_quantity[0] * products[0].price;
+// extended_price2 = product_quantity[1] * products[1].price;
+// extended_price3 = product_quantity[2] * products[2].price;
+// extended_price4 = product_quantity[3] * products[3].price;
+// extended_price5 = product_quantity[4] * products[4].price;
 
-document.write (`<table style="border: 1px solid black;text-align: center;">`)
 
-document.write (`<tr style="border: 1px solid black;"><th style="border: 1px solid black;">Name</th><th>Price</th><th>Quantity</th><th>Extended Cost</th></tr>`)
+document.write (`
+<table style="border: 1px solid black;text-align: center;">
+  <tr style="border: 1px solid black;">
+  <th style="border: 1px solid black;"> Name</th> 
+  <th style="border: 1px solid black;">Price</th>
+  <th style="border: 1px solid black;">Quantity</th>
+  <th style="border: 1px solid black;">Extended Cost</th>
+  </tr>`)
 for (let i = 0; i < products.length; i ++){
-  document.write(`<tr style="border: 1px solid black;"><td style="border: 1px solid black;">${products[i].name}</td><td>${products[i].price}</td><td>${product_quantity[i]}</td><td>${eval('extended_price'+(i+1)).toFixed(2)}</td></tr>`)
-};
-document.write(`</table>`)
+  extended_price = products[i].price * product_quantity[i];
 
+  document.write(`
+    <tr style="border: 1px solid black;"> 
+    <td style="border: 1px solid black;"> ${products[i].name}</td>
+    <td style="border: 1px solid black;">${products[i].price}</td>
+    <td style="border: 1px solid black;">${product_quantity[i]}</td>
+    <td style="border: 1px solid black;">${extended_price.toFixed(2)}</td>
+    </tr>`)
+};
+
+document.write(`</table>`)
 
     </script>
 </head>

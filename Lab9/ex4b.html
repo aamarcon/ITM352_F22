@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table  border="1" style="border: 1px solid black;text-align: center;"
+    onclick="new_row = this.appendChild(document.createElement('tr'))
+    new_cell = new_row.appendChild(document.createElement('td'))
+    new_cell.innerHTML='XXXXX'">
+   
+        <tr id="del_row"><th>Prod#</th><th>Name</th><th>Price</th><th>Extended</th></tr>
+
+        <script>
+            var product_quantities = [2, 1, 2, 3, 11];
+            products = [
+            { 'name': 'small gumball', 'price': 0.02 },
+            { 'name': 'medium gumball', 'price': 0.05 },
+            { 'name': 'large gumball', 'price': 0.07 },
+            { 'name': 'small jawbreaker', 'price': 0.06 },
+            { 'name': 'large jawbreaker', 'price': 0.10 }
+            ];
+            var extended_price;
+            for (i=0; i<products.length; i++) {
+                extended_price = products[i].price * product_quantities[i];
+                document.write(`<tr><td>${i+1}</td><td>${products[i].name}</td><td>${products[i].price}</td>
+                    <td>$ ${extended_price.toFixed(2)}</td></tr>`);
+            }
+        </script>
+        
+
+</table>
+<input type="button" value="Delete Last Row"
+onclick ="getElementById('del_row').deleteRow(del_row.rows.length)">
+   
+</body>
+</html>
