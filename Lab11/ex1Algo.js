@@ -1,0 +1,11 @@
+step1=13;
+step2=parseInt(step1/4);
+step3 = step2 + step1;
+step4 = 2; // Not Jan, so look at month before on table
+step6 = step4 + step3;
+step7 = step6 + 3;
+step8 = total of step 5 or 7;
+step9 = if 2000 or 1900 check;
+step10 = if leap check;
+step11 = no total8 - 1;
+step12 = 0;
