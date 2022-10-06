@@ -14,6 +14,6 @@ function junk3() {
     return `i3 is ${i3}`;
 }
 
-var retString =  junk2();
-console.log("junk1= " + retString);
-console.log("i1= " + i2);
+var retString =  junk1();
+console.log("junk3= " + retString);
+console.log("i3= " + i1);

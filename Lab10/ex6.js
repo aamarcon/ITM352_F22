@@ -1,7 +1,6 @@
-
-/* function that takes a string as 
-input and depending on the value of return errors returns an array of errors or a boolean true if that string is 
-a non_negative integer and false otherwise */
+// function checkIt(item, index){
+//     console.log(`part ${index} is ${(isNonNegInt(item)?'a':'not a')} quantity`);
+// }
 
 
 function isNonNegInt (userInput, returnErrors = false) {
@@ -19,11 +18,24 @@ function isNonNegInt (userInput, returnErrors = false) {
     }
 }
 
-var attributes  =  "Daniel;21;21+0.5;0.5-age";
 
+
+
+
+var attributes  =  "<name>;<age>;<age + 0.5>;<0.5 - age>"
 var pieces = attributes.split(";");
-
-for(i=0; i < pieces.length; i++){
-    errArray = isNonNegInt(pieces[i], true);
-    console.log(`i: ${i} ${errArray.join(", ")}`);
+for (i=0; i<pieces.length; i++){
+    console.log(pieces[i]);
+    console.log(`i=${i} value=${pieces[i]} type=${typeof pieces[i]}`)
 }
+
+
+
+console.log(pieces);
+
+
+pieces.forEach((item, index) => {
+    console.log(`part ${index} is ${(isNonNegInt(item)?'a':'not a')} quantity`);
+
+} ) 
+
