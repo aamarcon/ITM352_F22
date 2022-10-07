@@ -1,0 +1,53 @@
+main {
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+}
+
+#command {
+    font-size: 1em;
+}
+
+#report {
+    height: 20px;
+    color: #0892d0;
+}
+
+#report span {
+    padding-right: 10px;
+}
+
+#report #error {
+    color: #FF0000;
+}
+
+#program_textarea {
+    min-width: 100px;
+    max-width: 200px;
+    min-height: 400px;
+    height: 93%;
+    width: 100%;
+    display: inline-block;
+    background: lightgoldenrodyellow;
+}
+
+#c {
+    float: left;
+    display: inline-block;
+}
+
+#program_instructions {
+    font-size: .85em;
+} 
+
+#command_instructions {
+    font-size: .85em;
+}
+
+#execute_button {
+    display: block;
+    padding: 1 79px;
+    margin: 16px 16px;
+}

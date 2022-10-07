@@ -1,0 +1,84 @@
+
+<!-- saved from url=(0076)https://dport96.github.io/ITM352/morea/090.algorithms/RobotSim/RobotSim.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="./RobotSim_files/Robot.Sim.js"></script>
+    <link rel="stylesheet" type="text/css" href="./RobotSim_files/RobotSim.css">
+</head>
+<body><h2>JavaScript Robot Simulator (Updated)</h2>
+<p id="command_instructions">
+The application can read commands in following format (case insensitive):
+    </p><ul>
+        <li>PLACE X,Y,F <i>Put robot at X,Y facing F (X: 0,1,2,3,4  Y: 0,1,2,3,4 F:north,south,east,west)</i></li>
+        <li>BLOCK X,Y <i>Put a block at X,Y</i></li>
+        <li>MOVE <i>Move robot forward one space</i></li>
+        <li>LEFT <i>Rotate robot to the left</i></li>
+        <li>RIGHT <i>Rotate robot to the right</i></li>
+        <li>REPORT <i>Give the current status of the robot</i></li>
+    </ul>
+<p></p>
+<main>
+    <div class="input-area">
+        <label for="command">Enter Command:</label>
+        <input type="text" id="command" onfocusout="inputView.processCommand(this.value)" onkeydown="if (event.keyCode == 13) inputView.processCommand(this.value);" autofocus="">
+<button id="send" onclick="inputView.processCommand(command.value);">Send Command</button>
+            <button id="restart">Reset</button>
+    </div>
+    <div class="content">
+        <h4>Current Status:</h4>
+
+        <p id="report"><span id="error">Coordinates out of range!</span></p>
+    
+    </div>
+    <br>
+    <div id="program_instructions">
+            The robot <code>controller</code> object has the following methods:
+            <ul>
+                <li>PLACE X,Y,F <code>controller.place("X,Y,F")</code></li>
+                <li>BLOCK X,Y <code>controller.block("X,Y")</code>/li&gt;
+                </li><li>MOVE <code>bool controller.move() true</code>  if can move, <code>false</code> otherwise</li>  
+                <li>LEFT <code>controller.left()</code></li>
+                <li>RIGHT <code>controller.right()</code></li>
+            </ul>
+            Put the robot code in the yellow textarea. <code>controller.move();</code> will move the robot forward. Returns <code>true</code> if robot moves. <code>controller.right();</code> will rotate the robot clockwise. Use <code>await sleep(200);</code> to slow down the command processing if needed. Any Javascript may be used. <code>if(){}</code> and <code>while(){}</code> may be used. Press the Execute button to execute the code.
+                </div>
+    <div>
+        <canvas id="c" width="551" height="580">
+            <img id="robot_north_img" src="./RobotSim_files/robot_north.png">
+            <img id="robot_south_img" src="./RobotSim_files/robot_south.png">
+            <img id="robot_east_img" src="./RobotSim_files/robot_east.png">
+            <img id="robot_west_img" src="./RobotSim_files/robot_west.png">
+        </canvas>
+    </div>
+    <div>
+            <input id="execute_button" type="button" value="Execute" onclick="program();">
+<textarea id="program_textarea">controller.move();
+controller.move();
+controller.rotate();
+controller.move();
+spin_count=1;
+while(spin_count++ &lt; 10) {
+    controller.rotate();
+}
+alert('done!');
+    </textarea>
+    </div>
+</main>
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function program() {
+        var program_text = document.getElementById("program_textarea").value;
+        // add delays for move and rotate
+        program_text = program_text.replace(/controller\.move\(\);/g, 'controller.move();await sleep(200);');
+        program_text = program_text.replace(/controller\.rotate\(\);/g, 'controller.rotate();await sleep(200);');
+        eval(` 
+            (async function() {
+            ${program_text}
+        })();
+        `);
+    }
+
+</script>
+<div></div></body></html>
