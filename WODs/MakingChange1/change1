@@ -10,7 +10,7 @@
 // console.log(parseInt(4/1));
 // console.log(4%1);
 
-amount = 1.22;
+amount = 1.77;
 
 // make amount in pennies *100
 amount *= 100;
@@ -19,18 +19,15 @@ amount *= 100;
 
 if(amount/25 >= 1) {
     quarters = parseInt(amount/25);
-    console.log(quarters);
     amount = amount%25;
-    console.log(amount);
 
     
 }else quarters = 0; // if no quarters value 0
 
 if(amount/10 >= 1){
-    dimes = parseInt(amount/10);
-    console.log(dimes);
+    dimes = parseInt(amount/10); 
     amount = amount%10
-    console.log(amount);
+ 
 }else dimes = 0;
 if(amount/5 >= 1){
     nickles = parseInt(amount/5);
@@ -44,4 +41,4 @@ if(amount/1 >= 1){
     amount = 0;
     console.log(amount);
 }else pennies = 0;
-console.log(`You have as chance ${quarters} quarters, ${dimes} dimes, ${nickles} nickles and ${pennies} pennies`)
+console.log(`You have as change ${quarters} quarters, ${dimes} dimes, ${nickles} nickles and ${pennies} pennies`)
