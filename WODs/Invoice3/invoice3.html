@@ -9,43 +9,65 @@
    
       <script src="./products_data.js"></script>
 
+<script>
+ var taxes = 0;
+ var quantities = [4, 4, 0, 9, 10];
+ var subtotal = 0;
+ var shipping_cost = 0;
+ var total = 0;
+ 
+ //Products and price in the row on the table
+function generate_item_rows(array, products){
+    for(let i in products){
+      document.write(`
+      <tr> 
+            <td width="43%">${products[i].name}</td>
+            <td align="center" width="11%">${quantities[i]}</td>
+            <td width="13%">${products[i].price}</td>
+            <td width="54%">${extended_price = quantities[i] * products[i].price}</td>
+            </tr>`)
+            subtotal += extended_price;
+                   
+    } 
 
-
-
-
-
- <script>
-        /* THIS IS A INVOICE THAT CALCULATES THE TAX 
-        AND TOTAL OF 5 PRODUCTS 
-        THIS IS A MULTIPLE LINE COMMENT */
-
-        // Product Data 
-        // calculates subtotal
-        
-     var subtotal = (extended_price1 + extended_price2+ extended_price3+ extended_price4+extended_price5);
-        //calculates taxes
-     var taxes = (extended_price1 + extended_price2+ extended_price3+ extended_price4+extended_price5) * .0575;
+taxes = subtotal * .0575; 
     
-    //Array for quantities
-    var quantities = [4, 4, 7, 9, 10];
+if(subtotal < 50){
+  shipping_cost = 2;
+  }
+  else if(subtotal < 100){
+    shipping_cost = 5;
+  }
+  else {
+    shipping_cost = (subtotal * .05);
+  }
+  total = subtotal + taxes + shipping_cost;
+  console.log(subtotal, taxes, shipping_cost)
+      document.write(`
+      <tr>
+            <td colspan="4" width="100%">&nbsp;</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+      <td width="54%">$ ${subtotal.toFixed(2)}</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Taxes</td>
+      <td width="54%">$ ${taxes.toFixed(2)}</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
+      <td width="54%">$ ${shipping_cost.toFixed(2)}</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Total</td>
+      <td width="54%">$ ${total.toFixed(2)}</td>
+    </tr>
+   `)
+}
 
- // calculates the shipping cost dependent on price 0-50/ 50-99/ 100+
-     var shipping_cost = 0
-       
-        if(subtotal < 50){
-            shipping_cost = 2;
 
-        }else if(subtotal < 100){
-            shipping_cost = 5;
-        }
-        else {
-            shipping_cost = (subtotal * .05);
-        }
-
-            // calculates the total adding taxes and subtotal.
-     var total = subtotal + taxes + shipping_cost;
-
-    </script>
+</script>
 </head>
 <body>
 
@@ -57,13 +79,20 @@
             <th style="text-align: center;" width="13%">price</th>
             <th style="text-align: center;" width="54%">extended price</th>
           </tr>
-          <tr> <!--Products and price in the row ot the table-->
-            <td width="43%"><script>document.write(products[0].name)</script></td>
+          
+          <script>generate_item_rows(quantities, products);</script>
+          
+        
+    
+</body>
+</html>
+
+<!-- <td width="43%"><script>document.write(products[0].name)</script></td>
             <td align="center" width="11%"><script>document.write(quantities[0])</script></td>
             <td width="13%"><script>document.write(products[0].price)</script></td>
             <td width="54%"><script>document.write(extended_price1.toFixed(2))</script></td>
           </tr>
-          <tr>
+           <tr>
             <td width="43%"><script>document.write(products[1].name)</script></td>
             <td align="center" width="11%"><script>document.write(quantities[1])</script></td>
             <td width="13%"><script>document.write(products[1].price)</script></td>
@@ -106,11 +135,6 @@
               <tr>
             <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
             <td width="54%"><strong><script>document.write(total.toFixed(2))</script></strong></td>
-          </tr>
+          </tr>  
         </tbody>
-      </table>
-
-
-    
-</body>
-</html>
+      </table> -->
