@@ -25,5 +25,10 @@ var products = [
     name : "Blackberry",
     price : 13.00,
     image : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
-    }
+    },
+    product6 = {
+    name : "Orange",
+    price : 1002.00,
+    image : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
+        }
     ]
