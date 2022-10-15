@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Purchase</title>
+
+    <script>
+function isNonNegativeInteger (queryString, returnErrors = false) {
+    errors = []; // assume no errors at first
+
+    if(Number(queryString) != queryString){
+       errors.push('Not a number!'); 
+    }
+    else {
+      if (queryString < 0) errors.push('Negative value!'); // Check if it is non-negative
+      if (parseInt(queryString) != queryString) errors.push('Not an integer!'); // Check that it is an integer
+    }// Check if string is a number value
+    
+    if (returnErrors) {
+        return errors;
+    } else if (errors.length == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+///3 and a and b
+        let params = (new URL(document.location)).searchParams;
+        console.log(params)
+        if (params.has("quantity_textbox")){
+           let theText = params.get("quantity_textbox");
+           //Validate the inpout and if good printer err
+            if(isNonNegativeInteger(theText)){
+                document.write(`Here is you for ordering ${theText} things`);
+            }
+         }
+
+
+
+         
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
