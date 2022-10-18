@@ -33,7 +33,7 @@ function isNonNegativeInteger (queryString, returnErrors = false) {
         console.log(params)
         if (params.has("quantity_textbox")){
            let theText = params.get("quantity_textbox");
-           //Validate the inpout and if good printer err
+           //Validate the input and if good printer err
             if(isNonNegativeInteger(theText)){
                 document.write(`Here is you for ordering ${theText} things`);
             }

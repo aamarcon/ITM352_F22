@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice 3 </title>
+
+   
+      <script src="./products_data.js"></script>
+
+<script>
+ var taxes = 0;
+ var quantities = [];
+ var subtotal = 0;
+ var shipping_cost = 0;
+ var total = 0;
+ // loop pick the value and adds to the array of quantities. 
+ let params = (new URL(document.location)).searchParams;
+        let GET = {};
+        params.forEach(function(value, key){
+           GET[key] = value;
+           parseInt(quantities.push(value));
+          });
+
+
+        //check if the value is a interger
+function isNonNegativeInteger (quantities, returnErrors = false) {
+    errors = []; // assume no errors at first
+
+    if(Number(quantities) != quantities){
+       errors.push('Not a number!'); 
+    }
+    else {
+      if (quantities < 0) errors.push('Negative value!'); // Check if it is non-negative
+      if (parseInt(quantities) != quantities) errors.push('Not an integer!'); // Check that it is an integer
+    }// Check if string is a number value
+    
+    if (returnErrors) {
+        return errors;
+    } else if (errors.length == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+ //Products and price in the row on the table
+function generate_item_rows(array, products){
+    for(let i in products){
+      if(isNonNegativeInteger(quantities[i])){
+      document.write(`
+      <tr> 
+            <td width="43%">${products[i].name}</td>
+            <td align="center" width="11%">${quantities[i]}</td>
+            <td width="13%">${products[i].price}</td>
+            <td width="54%">${extended_price = quantities[i] * products[i].price}</td>
+            </tr>`)}
+            else { document.write(`
+      <tr> 
+            <td width="43%">${products[i].name}</td>
+            <td style="color:red;" align="center" width="11%">${quantities[i]}<br>Not a number<br>Not an interger</td>
+            <td width="13%">${products[i].price}</td>
+            <td width="54%">${extended_price = 0 * products[i].price}</td>
+            </tr>`)
+
+            }
+            subtotal += extended_price;
+                   
+    } 
+
+taxes = subtotal * .0575; 
+    
+if(subtotal < 50){
+  shipping_cost = 2;
+  }
+  else if(subtotal < 100){
+    shipping_cost = 5;
+  }
+  else {
+    shipping_cost = (subtotal * .05);
+  }
+  total = subtotal + taxes + shipping_cost;
+  console.log(subtotal, taxes, shipping_cost)
+      document.write(`
+      <tr>
+            <td colspan="4" width="100%">&nbsp;</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+      <td width="54%">$ ${subtotal.toFixed(2)}</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Taxes</td>
+      <td width="54%">$ ${taxes.toFixed(2)}</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
+      <td width="54%">$ ${shipping_cost.toFixed(2)}</td>
+      </tr>
+      <tr>
+      <td style="text-align: center;" colspan="3" width="67%">Total</td>
+      <td width="54%">$ ${total.toFixed(2)}</td>
+    </tr>
+   `)
+}
+
+
+</script>
+</head>
+<body>
+
+    <table border="2">
+        <tbody>
+          <tr>
+            <th style="text-align: center;" width="43%">Item</th>
+            <th style="text-align: center;" width="11%">quantity</th>
+            <th style="text-align: center;" width="13%">price</th>
+            <th style="text-align: center;" width="54%">extended price</th>
+          </tr>
+          
+          <script>generate_item_rows(quantities, products);</script>
+          
+        </tbody>
+      </table>
+    
+</body>
+</html>
