@@ -8,7 +8,7 @@ var products = [
     {
     "name" : "Volleyball Prime-T",
     "price" : 21.89,
-    "image" : "https://3docean.img.customer.envatousercontent.com/files/273007223/volleyBall_3x3_prev.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=6b456eab4f834e4fa29ee11f2386c3bb",
+    "image" : "https://m.media-amazon.com/images/I/41VBV7gKpwL._AC_SY1000_.jpg",
     "onHand" : 13
     },
     {
