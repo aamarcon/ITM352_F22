@@ -7,7 +7,7 @@
     <title>Invoice 3 </title>
 
    
-      <script src="./products_data"></script>
+      <script src="./products_data.js"></script>
 
 <script>
  var taxes = 0;
@@ -58,7 +58,7 @@ function generate_item_rows(array, products){
             else { document.write(`
       <tr> 
             <td width="43%">${products[i].name}</td>
-            <td style="color:red;" align="center" width="11%">${quantities[i]}<br>Not a number<br>Not an interger</td>
+            <td style="color:red;" align="center" width="11%">${quantities[i]}<br>${errors}<br>${errors}</td>
             <td width="13%">${products[i].price}</td>
             <td width="54%">${extended_price = 0 * products[i].price}</td>
             </tr>`)
