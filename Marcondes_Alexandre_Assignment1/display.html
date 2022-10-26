@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>We Got BALLs</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
+
+    <link href="./public/app.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="products_data.js"> 
+   
+
+    console.log(myProducts);
+     </script>
+</head>
+  <!-- FORM BODY but CSS not WORK-->
+  <form action="./invoice.html" method="GET">
+<body>
+  
+<!--- Used code sample form Port -->
+    <header>
+        <h1>Get Your Game Ball Now</h1>
+    </header>
+    <div>
+        <aside>
+            <!-- <div style="font-size:4rem;text-align:center;font-weight: bold;font-style: italic; color: white">
+                Still deciding
+            </div> -->
+        </aside>
+
+        <main>
+            
+            <script>
+               
+                for(i in products){
+            document.write(`
+            <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
+                <h2>${products[i].name}</h2>
+                <p>$ ${products[i].price}</p>
+                <img src=${products[i].image}>
+                <h3>
+                    <label for"Quantaty${[i]}> Quantity: </label><br>
+                    <input style=display:"block" type="text" name="quantity${[i]}_label " value=""><br>
+                </h3>
+            </section>
+            `)}
+        </script>
+
+
+
+
+
+            <script>
+                let value = document.getElementById("rotate").className;
+                document.getElementById("item").innerHTML = value;
+                </script>
+
+        </main>
+    </div>
+    <footer>
+        <h1>
+            Best Quality in Town!!!
+        </h1>
+        <p><input type="submit" value="Purchase" id="buttonLike"></p>
+    </footer>
+
+</body>
+</form>
+
+</html>

@@ -26,4 +26,4 @@ var products = [
     price : 13.00,
     image : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
     },
-    ]
+]
