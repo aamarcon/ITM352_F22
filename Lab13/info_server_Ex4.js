@@ -1,3 +1,9 @@
+var products = require(__dirname + '/product_data.json');
+products.forEach( (prod,i) => {prod.total_sold = 0}); 
+
+
+
+
 function isNonNegativeInteger (quantities, returnErrors = false) {
   errors = []; // assume no errors at first
 
@@ -46,7 +52,7 @@ app.post("/process_form", function (request, response) {
   if(isNonNegativeInteger(q)){
   response.send(`Thank you for purchasing ${q} things!`);
   } else {
-    response.send(`${q} is not valid qunatity == hit the back button`)
+    response.send(`${q} is not valid qunatity == hit the back button`);
   }
 }
 });

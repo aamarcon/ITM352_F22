@@ -1,4 +1,4 @@
-var products = [
+[
     {
     "name" : "Soccer M3-Super-soft",
     "price" : 111.99,
