@@ -28,39 +28,42 @@ function isNonNegativeInteger (queryString, returnErrors = false) {
     }
 }
 
-        function checkQuantityTextbox() {
-         let input_string = document.getElementById("quantity_textbox").value;
-         let err_array = isNonNegativeInteger(input_string, true);
-         if(err_array.length == 0){
-            qty_textbox_message.innerHTML = input_string;
-         }else {
-            qty_textbox_message.innerHTML = err_array.join(";");
-         }
+function checkQuantityTextbox(theTextbox) {
+            errs = isNonNegativeInteger(theTextbox.value, true);
+            document.getElementById(theTextbox.name + '_message').innerHTML = errs.join(", ");
         }
 
-function displayPurchase() {
-        let value= document.getElementById('quantity_textbox').value;
-      let is_valid = isNonNegativeInteger(value);
-      if(is_valid){
-        document.write(`Thanks you for ordering ${value} things!`);
-      }else {
-        document.write(`Enter a valid quantity bozo`)
-      }
+        // function checkQuantityTextbox() {
+        //  let input_string = document.getElementById("quantity_textbox").value;
+        //  let err_array = isNonNegativeInteger(input_string, true);
+        //  if(err_array.length == 0){
+        //     qty_textbox_message.innerHTML = input_string;
+        //  }else {
+        //     qty_textbox_message.innerHTML = err_array.join(";");
+        //  }
+        // }
 
-        }
+// function displayPurchase() {
+//         let value= document.getElementById('quantity_textbox').value;
+//       let is_valid = isNonNegativeInteger(value);
+//       if(is_valid){
+//         document.write(`Thanks you for ordering ${value} things!`);
+//       }else {
+//         document.write(`Enter a valid quantity bozo`)
+//       }
+
+//         }
     </script>
 </head>
 <body>
 
     <script> 
     let params = (new URL(document.location)).searchParams;
-      console.log(params)
-      if(params.has("error")){
-        let error = params.get("error");
-        alert(error);
+      // console.log(params)
+      // if(params.has("error")){
+      //   let error = params.get("error");
+      //   alert(error);}
 
-
-      }
       if (params.has("quantity_textbox")){
          let theText = params.get("quantity_textbox");
          //Validate the inpout and if good prn=int err.
@@ -78,23 +81,23 @@ function displayPurchase() {
 
 </script>
 
+
+
+<form name='quantity_form' action="process_form" method="POST">
+  <script>
+      for (i in products) {
+          document.write(`<h3>${products[i]["name"]} at \$${products[i]["price"]} (${products[i]["total_sold"]} sold)</h3>`);
+          document.write(`
+  <label for="quantity_textbox">Quantity desired:</label>
+  <input type="text" name="quantity_textbox[${i}]" onkeyup="checkQuantityTextbox(this);">
+  <span id="quantity_textbox[${i}]_message">Enter a quantity</span>
+  `);
+      }
+  </script>
+  <br>
+  <input type="submit" value='Purchase'>
+</form>
 <script>
-     for (i in products) {
-        // document.write(`<h3>${products[0]["name"]} at \$${products[0]["price"]} for a total of</h3>`);
-        document.write(`<h4>${products[i]["total_sold"]} ${products[i]["name"]} have been sold!</h4>`);
-    }
-</script>
-
-
-    <form name="quantity_form" action="/process_form" method="POST">
-      <label for="Quantitiy desired:">Quantity yeap:</label><br>
-      <input id="quantity_textbox" type="text" onkeyup="checkQuantityTextbox()" name="quantity_textbox";>
-      <span id="qty_textbox_message">Enter a quantity:</span>
-    </br>
-    <input type="submit" value="Purchase!">
-  </form> 
-
-<script>   
 // make the form sticky...
  if (params.has('quantity_textbox')) {
   quantity_form["quantity_textbox"].value = params.get('quantity_textbox');
