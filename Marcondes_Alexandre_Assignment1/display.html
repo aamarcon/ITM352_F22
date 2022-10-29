@@ -10,10 +10,9 @@
     <link href="./public/app.css" rel="stylesheet">
 
 
-    <script type="text/javascript" src="products_data.js"> 
-   
-   var products = require(__dirname + '/products_data.json');
-    console.log(myProducts);
+    <script type="text/javascript" src="./products_data.js"> 
+    
+
      </script>
 </head>
   <!-- FORM BODY but CSS not WORK-->
@@ -34,7 +33,7 @@
         <main>
             
             <script>
-               
+              
                 for(i in products){
             document.write(`
             <section class="item" onmouseover="this.className='item rotate'" onclick="this.className='item'">
@@ -48,8 +47,6 @@
             </section>
             `)}
         </script>
-
-
 
 
 
