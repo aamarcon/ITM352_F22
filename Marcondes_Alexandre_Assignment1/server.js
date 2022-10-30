@@ -45,7 +45,7 @@ app.all('*', function (request, response, next) {
 var products = require(__dirname + '/products_data.json');
 products.forEach( (prod,i) => {prod.total_sold = 0});
 
-app.get("/products_data.json", function (request, response, next) {
+app.get("/products_data.js", function (request, response, next) {
    response.type('.js');
    var products_str = `var products = ${JSON.stringify(products)};`;
    response.send(products_str);
@@ -62,7 +62,7 @@ app.post("/process_form", function (request, response) {
 
             products[0].total_sold += Number(userQty);
 
-            response.redirect('receipt.html?quantity=' + userQty);
+            response.redirect('invoice.html?quantity=' + userQty);
         } else {
             response.redirect('order_page.html?error=Invalid%20Quantity&quantity_textbox=' + userQty);
         };
@@ -71,8 +71,6 @@ app.post("/process_form", function (request, response) {
     
  });
  
-
-
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
 
 
