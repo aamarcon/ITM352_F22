@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <!--This code displays the products (all the balls) and it is also a form. The form is a method POST and will be evaluated on the server. -->
    
     <meta charset="utf-8">
     <title>We Got BALLs</title>
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="style1.css">
 </head>
 <!-- Create a post form POST method-->
-  <form action="./invoice.html" method="GET">
+  <form action="" method="GET">
 <body>
   
 <!--- Used code sample form Port -->
@@ -27,7 +28,8 @@
         <main>
             
             <script>
-              
+          //This creates a display of the products that will be sold.
+          // It     
         for(i in products){
             document.write(`
             <section class="item">
@@ -36,12 +38,11 @@
                 <img src=${products[i].image}>
                 <h3>
                     <label for"Quantaty${[i]}> Quantity: </label><br>
-                    <input style=display:"block" type="text" name="quantity${[i]}_label" value=""><br>
+                    <input style=display:"block" type="text" name="postQty${[i]}" value=""><br>
                 </h3>
             </section>
             `)}
         </script>
-
 
         </main>
     </div>

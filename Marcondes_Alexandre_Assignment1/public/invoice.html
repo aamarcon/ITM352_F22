@@ -10,11 +10,12 @@
       <script src="./products_data.js"></script>
 
 <script>
- var taxes = 0;
- var quantities = [];
- var subtotal = 0;
- var shipping_cost = 0;
- var total = 0;
+ var taxes = 0; // setting start tax to zero
+ var quantities = []; // creating array of quantities that will be recieved by server
+ var subtotal = 0; // setting start subtotal to zero
+ var shipping_cost = 0; // setting start shipping cost to zero
+ var total = 0; //setting start total to zero
+
  // loop pick the value and adds to the array of quantities. 
  let params = (new URL(document.location)).searchParams;
         let GET = {};
@@ -24,7 +25,7 @@
           });
 
 
-        //check if the value is a interger
+        //check if the value is a non-negative interger
 function isNonNegativeInteger (quantities, returnErrors = false) {
     errors = []; // assume no errors at first
 
@@ -50,6 +51,7 @@ function generate_item_rows(array, products){
       if(isNonNegativeInteger(quantities[i])){
       document.write(`
       <tr> 
+            <td width=10%> <img width="30px" height="30px" src=${products[i].image}>
             <td width="43%">${products[i].name}</td>
             <td align="center" width="11%">${quantities[i]}</td>
             <td width="13%">${products[i].price}</td>
@@ -62,6 +64,7 @@ function generate_item_rows(array, products){
             <td width="13%">${products[i].price}</td>
             <td width="54%">${extended_price = 0 * products[i].price}</td>
             </tr>`)
+          `<br>`
 
             }
             subtotal += extended_price;
@@ -83,22 +86,22 @@ if(subtotal < 50){
   console.log(subtotal, taxes, shipping_cost)
       document.write(`
       <tr>
-            <td colspan="4" width="100%">&nbsp;</td>
+            <td colspan="5" width="100%">&nbsp;</td>
       </tr>
       <tr>
-      <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+      <td style="text-align: center;" colspan="4" width="67%">Sub-total</td>
       <td width="54%">$ ${subtotal.toFixed(2)}</td>
       </tr>
       <tr>
-      <td style="text-align: center;" colspan="3" width="67%">Taxes</td>
+      <td style="text-align: center;" colspan="4" width="67%">Taxes</td>
       <td width="54%">$ ${taxes.toFixed(2)}</td>
       </tr>
       <tr>
-      <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
+      <td style="text-align: center;" colspan="4" width="67%">Shipping</td>
       <td width="54%">$ ${shipping_cost.toFixed(2)}</td>
       </tr>
       <tr>
-      <td style="text-align: center;" colspan="3" width="67%">Total</td>
+      <td style="text-align: center;" colspan="4" width="67%">Total</td>
       <td width="54%">$ ${total.toFixed(2)}</td>
     </tr>
    `)
@@ -112,10 +115,11 @@ if(subtotal < 50){
     <table border="2">
         <tbody>
           <tr>
-            <th style="text-align: center;" width="43%">Item</th>
-            <th style="text-align: center;" width="11%">quantity</th>
-            <th style="text-align: center;" width="13%">price</th>
-            <th style="text-align: center;" width="54%">extended price</th>
+            <th style="text-align: center;" width="10%">Ball type</th>
+            <th style="text-align: center;" width="40%">Item</th>
+            <th style="text-align: center;" width="10%">quantity</th>
+            <th style="text-align: center;" width="20%">price</th>
+            <th style="text-align: center;" width="20%">extended price</th>
           </tr>
           
           <script>generate_item_rows(quantities, products);</script>
