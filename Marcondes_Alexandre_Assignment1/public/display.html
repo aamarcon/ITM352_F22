@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="style1.css">
 </head>
 <!-- Create a post form POST method-->
-  <form action="" method="GET">
+  <form name="quantity" action="/process_form" method="post">
 <body>
   
 <!--- Used code sample form Port -->
@@ -29,17 +29,18 @@
             
             <script>
           //This creates a display of the products that will be sold.
-          // It     
+        // the loop loops every item in the products_data.js 
+        
         for(i in products){
             document.write(`
             <section class="item">
                 <h2>${products[i].name}</h2>
                 <p>$ ${products[i].price}</p>
                 <img src=${products[i].image}>
-                <h3>
-                    <label for"Quantaty${[i]}> Quantity: </label><br>
+                <h4>
+                    <label for"Quantity${[i]}> Quantity: </label><br>
                     <input style=display:"block" type="text" name="postQty${[i]}" value=""><br>
-                </h3>
+                </h4>
             </section>
             `)}
         </script>

@@ -53,7 +53,7 @@
     line-height: 2rem;
     padding-top: 0.3rem;
   }
-  h3 {
+  h4 {
     font-size: 2rem;
     color: yellow;
     text-align: right;
@@ -64,7 +64,7 @@
     line-height: 2rem;
     padding-top: 5rem;
   }
-  h3 label {
+  h4 label {
     width: 70px;
     margin-right:160px;
     color: rgb(17, 13, 13);

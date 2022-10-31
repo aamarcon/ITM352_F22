@@ -9,6 +9,10 @@ app.use(express.static(__dirname + '/public'));
 //use url 
 app.use(express.urlencoded({ extended: true }));
 
+//Loading the Json file and runing a loop to add product sold to the object.
+var products = require(__dirname + '/products_data.json');
+products.forEach( (prod,i) => {prod.total_sold = 0});
+
 //function to check if it is a positive integer. 
 function isNonNegativeInteger (queryString, returnErrors = false) {
     errors = []; // assume no errors at first
@@ -30,25 +34,31 @@ function isNonNegativeInteger (queryString, returnErrors = false) {
     }
 }
 
-
-app.get('/display.html', function(request, response, next){
-    console.log(request.method + 'Not the star(*) but get ' + request.path);
+ //App all to catch any wrong request. 
+ app.all('*', function (request, response, next) {
+    console.log( request.method + " to " + request.path);
     next();
 });
+ 
 
 
-
-var products = require(__dirname + '/products_data.json');
-products.forEach( (prod,i) => {prod.total_sold = 0});
-
+//Converting a javaScript value to a javascrip object.
 app.get("/products_data.js", function (request, response, next) {
    response.type('.js');
    var products_str = `var products = ${JSON.stringify(products)};`;
    response.send(products_str);
 });
 
+
+app.get('/display.html', function(request, response, next){
+    console.log("Just got the file display.html");
+    next();
+});
+
+
+
 app.post("/process_form", function (request, response) {
-    var userQty = request.body['quantity_textbox'];
+    var userQty = request.body['quantity'];
 
     if (typeof userQty != 'undefined') {
         if(isNonNegativeInteger(userQty)){
@@ -58,21 +68,16 @@ app.post("/process_form", function (request, response) {
 
             products[0].total_sold += Number(userQty);
 
-            response.redirect('invoice.html?quantity=' + userQty);
+            response.redirect('testServerQty.html?quantity=' + userQty);
         } else {
-            response.redirect('order_page.html?error=Invalid%20Quantity&quantity_textbox=' + userQty);
+            response.redirect('display.html?error=Invalid%20Quantity&quantity_textbox=' + userQty);
         };
     
     } 
     
  });
 
- //App all to catch any wrong request. 
-app.all('*', function (request, response, next) {
-    console.log("Something Went Wrong!! NOT A POST!! CATCH ALL (*)");
-    next();
-});
- 
+
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
 
 
