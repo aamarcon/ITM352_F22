@@ -56,40 +56,39 @@ app.get('/display.html', function(request, response, next){
     next();
 });
 
-app.post("/process_form", function (request, response) {
+// app.post("/process_form", function (request, response) {
     
-    var parseObj = request.body;
+//     var parseObj = request.body;
 
-    var quantities = [];
+//     var quantities = [];
 
-    //Loop to parse object and to get the quantity on the query string.
-    for (num in parseObj){
-        quantities += parseObj[num];
-    }
-    // check to see if is define a integer and positive
-    if (typeof quantities != 'undefined') {
-        for(i = 0; i < quantities.length; i++){
-            if(isNonNegativeInteger(quantities[i])){
+//     //Loop to parse object and to get the quantity on the query string.
+//     for (num in parseObj){
+//         quantities += parseObj[num];
+//     }
+//     // check to see if is define a integer and positive
+//     if (typeof quantities != 'undefined') {
+//         for(i = 0; i < quantities.length; i++){
+//             if(isNonNegativeInteger(quantities[i])){
 
-                let brand = products[i]['name'];
-                let brand_price = products[i]['price'];
-                products[i].total_sold += Number(quantities[i]);
+//                 let brand = products[i]['name'];
+//                 let brand_price = products[i]['price'];
+//                 products[i].total_sold += Number(quantities[i]);
 
-            if(products[i].total_sold > products[i]['onHand']){
-                response.redirect(`invoice.html`); 
+//             if(products[i].total_sold > products[i]['onHand']){
+//                 response.redirect(`invoice.html`); 
         
-        } else {
-            response.redirect(`I am here`)
-        };
+//         } else {
+//             response.redirect(`I am here`)
+//         };
       
-    } else {
-        response.send("Hello from the bottom")
-    }
-    }
-} 
+//     } else {
+//         response.send("Hello from the bottom")
+//     }
+//     }
+// } 
 
-});
- 
+// });
 
 
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
