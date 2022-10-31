@@ -10,8 +10,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 
 //Loading the Json file and runing a loop to add product sold to the object.
-var products = require(__dirname + '/products_data.json');
-products.forEach( (prod,i) => {prod.total_sold = 0});
+
 
 //function to check if it is a positive integer. 
 function isNonNegativeInteger (queryString, returnErrors = false) {
@@ -41,7 +40,6 @@ function isNonNegativeInteger (queryString, returnErrors = false) {
 });
  
 
-
 //Converting a javaScript value to a javascrip object.
 app.get("/products_data.js", function (request, response, next) {
    response.type('.js');
@@ -50,44 +48,39 @@ app.get("/products_data.js", function (request, response, next) {
 });
 
 
+var products = require(__dirname + '/products_data.json');
+products.forEach( (prod,i) => {prod.total_sold = 0});
+
 app.get('/display.html', function(request, response, next){
     console.log("Just got the file display.html");
     next();
 });
 
+app.post("/process_form", function (request, response) {
+
+    var userQty = request.body['quantity_textbox'];
+    console.log(typeof(userQty));
 
 
-app.post("/process_form", function (request, response, next) {
-    console.log(request.body);
-   
-    let params = request.body;
-    var userQty = [];
-    for(let key in params){
-   
-        if (typeof userQty != 'undefined') {
-            if(isNonNegativeInteger(userQty)){
+    if (typeof userQty != 'undefined') {
+        if(isNonNegativeInteger(userQty)){
 
-                let brand = products[i]['name'];
-                let brand_price = products[i]['price'];
+            let brand = products[0]['name'];
+            let brand_price = products[0]['price'];
 
-                products[i].total_sold += Number(userQty);
-            }
-            response.redirect('testServerQty.html?quantity=' + userQty);
-        
+            products[0].total_sold += Number(userQty);
+
+            response.send(`<h2>Thank you for purchasing ${userQty} ${brand}. Your total is \$${userQty * brand_price}!</h2>`);
         } else {
-            response.redirect('display.html?error=Invalid%20Quantity&quantity_textbox=' + userQty);
+            response.send(`Error: ${userQty} is not a quantity. Hit the back button to fix..`)
         };
-    
-    } 
-    
+        
+    } else {
+        response.send("Hello from the bottom")
+    }
+
  });
+ 
 
 
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
-
-
-
-
-
-
-
