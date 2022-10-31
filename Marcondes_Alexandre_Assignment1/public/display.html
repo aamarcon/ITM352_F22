@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="style1.css">
 </head>
 <!-- Create a post form POST method-->
-  <form name="quantity" action="/process_form" method="post">
+  <form name="quantity" action="/purchase" method="post">
 <body>
   
 <!--- Used code sample form Port -->
@@ -39,7 +39,7 @@
                 <img src=${products[i].image}>
                 <h4>
                     <label for"quantity${[i]}> Quantity: </label><br>
-                    <input style=display:"block" type="text" name="postQty${[i]}"><br>
+                    <input style=display:"block" type="text" name="postQty${[i]}" value="0"><br>
                 </h4>
             </section>
             `)}

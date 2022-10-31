@@ -47,48 +47,59 @@ app.get("/products_data.js", function (request, response, next) {
    response.send(products_str);
 });
 
-
+//Gets the Jason file and saves to a variable called products
 var products = require(__dirname + '/products_data.json');
+
+//Add a products total_sold to each product in the jason file inicialized to 0.
 products.forEach( (prod,i) => {prod.total_sold = 0});
 
+//listening to a diplay.html request mine Index.html is display.html
 app.get('/display.html', function(request, response, next){
     console.log("Just got the file display.html");
     next();
 });
 
-// app.post("/process_form", function (request, response) {
+//Server side autentication for the form
+// Waiting for a post request named purchase
+app.post("/purchase", function (request, response) {
     
-//     var parseObj = request.body;
+    //GET QUANTITY FROM USER AND CHECK VALIDITY
+    let isNumber = true;
+    let buildStringForInvoice = "";
+    
+    for (i = 0;  i < products.length; i++){ //check all text boxes
+        var userKey = "postQty" + i;
+        var userQty = request.body[userKey]; // get the value
 
-//     var quantities = [];
+        if(typeof userQty != "undefined"){
+            if(isNonNegativeInteger(userQty)){
+                //valid quantity add to order
+                products[i].total_sold += Number(userQty);
+                if(products[i].total_sold > products[i]["onHand"]){
+                    response.send(`You want ${products[i].total_sold} of the ${products[i].name}. We only have ${products[i].onHand} on stock. Please hit the back button to purchase that amount.`)
+                }else {
+                buildStringForInvoice += userKey + '=' +userQty + '&';
+                }
+            } else {
+                // it is not a number or valid userQty!! ERROR
+                isNumber = false;
+            }
+        } else {
+            //TYPEOF USERQTY UNDEFINED !!ERROR TEXT NOT FOUND
+            isNumber = false;
+        }
+    }
+        if(!isNumber){
+            // found ERROR back to the page
+            response.redirect('display.html?error=Invalid%20Quantity');
+        }
+        else {
+            // All good create Invoice
+            response.redirect('invoice.html?' + buildStringForInvoice)
 
-//     //Loop to parse object and to get the quantity on the query string.
-//     for (num in parseObj){
-//         quantities += parseObj[num];
-//     }
-//     // check to see if is define a integer and positive
-//     if (typeof quantities != 'undefined') {
-//         for(i = 0; i < quantities.length; i++){
-//             if(isNonNegativeInteger(quantities[i])){
-
-//                 let brand = products[i]['name'];
-//                 let brand_price = products[i]['price'];
-//                 products[i].total_sold += Number(quantities[i]);
-
-//             if(products[i].total_sold > products[i]['onHand']){
-//                 response.redirect(`invoice.html`); 
-        
-//         } else {
-//             response.redirect(`I am here`)
-//         };
-      
-//     } else {
-//         response.send("Hello from the bottom")
-//     }
-//     }
-// } 
-
-// });
+        }
+    
+});
 
 
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
