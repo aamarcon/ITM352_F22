@@ -57,18 +57,23 @@ app.get('/display.html', function(request, response, next){
 
 
 
-app.post("/process_form", function (request, response) {
-    var userQty = request.body['quantity'];
+app.post("/process_form", function (request, response, next) {
+    console.log(request.body);
+   
+    let params = request.body;
+    var userQty = [];
+    for(let key in params){
+   
+        if (typeof userQty != 'undefined') {
+            if(isNonNegativeInteger(userQty)){
 
-    if (typeof userQty != 'undefined') {
-        if(isNonNegativeInteger(userQty)){
+                let brand = products[i]['name'];
+                let brand_price = products[i]['price'];
 
-            let brand = products[0]['name'];
-            let brand_price = products[0]['price'];
-
-            products[0].total_sold += Number(userQty);
-
+                products[i].total_sold += Number(userQty);
+            }
             response.redirect('testServerQty.html?quantity=' + userQty);
+        
         } else {
             response.redirect('display.html?error=Invalid%20Quantity&quantity_textbox=' + userQty);
         };

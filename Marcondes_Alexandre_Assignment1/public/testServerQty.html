@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,12 +31,16 @@ function isNonNegativeInteger (queryString, returnErrors = false) {
     }
 }
 
-let params = (new URL(document.location)).searchParams;
+ let params = (new URL(document.location)).searchParams;
+        console.log(params);
+        let userQty = {};
+        params.forEach(function(value, key){
+           GET[key] = value;
+           parseInt(userQty.push(value));
+          });
 
-var userQty = params.get('quantity');
-console.log(userQty);
 
-if (typeof userQty != 'undefined') {
+    if (typeof userQty != 'undefined') {
     if(isNonNegativeInteger(userQty)){
         for(i=0; i < quantity.length; i++){
 
@@ -56,4 +60,4 @@ if (typeof userQty != 'undefined') {
 </script>
     
 </body>
-</html>
+</html> -->

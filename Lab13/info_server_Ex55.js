@@ -46,10 +46,13 @@ app.get("/product_data.js", function (request, response, next) {
 });
 
 app.post("/process_form", function (request, response) {
-    var userQty = request.body['quantity_textbox'];
-
+    var userQty = request.body['Thisname'];
+    console.log("Thisname");
+    console.log(userQty);
     if (typeof userQty != 'undefined') {
         if(isNonNegativeInteger(userQty)){
+
+
 
             let brand = products[0]['name'];
             let brand_price = products[0]['price'];
@@ -57,6 +60,7 @@ app.post("/process_form", function (request, response) {
             products[0].total_sold += Number(userQty);
 
             response.redirect('receipt.html?quantity=' + userQty);
+            
         } else {
             response.redirect('order_page.html?error=Invalid%20Quantity&quantity_textbox=' + userQty);
         };
