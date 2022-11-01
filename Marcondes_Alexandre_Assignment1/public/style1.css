@@ -1,3 +1,15 @@
+ /* ALEXANDRE MARCONDES author
+      Credit for code from class ITM352 -- MR. KAZMAN and PORT 
+*/
+/* CSS helps style the display page. 
+Some of the code for h1 and h2 tags 
+comes from a professor PORT example
+for the SmartPhoneStore. 
+
+*/
+
+ 
+
  /* General */
  /* <!--- Used code sample form Port --> */
 
@@ -42,7 +54,6 @@
   
   h2 {
     font-size: 2rem;
-    /* color: yellow; */
     background: rgba(255, 255, 255, 0.1);
     text-align: center;
     width: 338px;

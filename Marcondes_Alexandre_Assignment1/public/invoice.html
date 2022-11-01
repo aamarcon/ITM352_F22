@@ -1,114 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice 3 </title>
+  <!--ALEXANDRE MARCONDES author
+    Credit for code from class ITM352 -- MR. KAZMAN and PORT 
+  -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   
-      <script src="./products_data.js"></script>
+  <title>Invoice 3 </title>
 
-<script>
- var taxes = 0; // setting start tax to zero
- var quantities = []; // creating array of quantities that will be recieved by server
- var subtotal = 0; // setting start subtotal to zero
- var shipping_cost = 0; // setting start shipping cost to zero
- var total = 0; //setting start total to zero
+  <script src="./products_data.js"></script>
 
- // loop pick the value and adds to the array of quantities. 
- let params = (new URL(document.location)).searchParams;
-        let GET = {};
-        params.forEach(function(value, key){
-           GET[key] = value;
-           parseInt(quantities.push(value));
-          });
+  <link rel="stylesheet" href="style2.css">
+
+  <script>
+    var taxes = 0; // setting start tax to zero
+    var quantities = []; // creating array of quantities that will be recieved by server
+    var subtotal = 0; // setting start subtotal to zero
+    var shipping_cost = 0; // setting start shipping cost to zero
+    var total = 0; //setting start total to zero
+
+    // loop pick the value and adds to the array of quantities. 
+    let params = (new URL(document.location)).searchParams;
+      let GET = {};
+      params.forEach(function(value, key){
+        GET[key] = value;
+        parseInt(quantities.push(value));
+      });
 
 
-        //check if the value is a non-negative interger
-function isNonNegativeInteger (quantities, returnErrors = false) {
-    errors = []; // assume no errors at first
+    //check if the value is a non-negative interger
+    function isNonNegativeInteger (quantities, returnErrors = false) {
+      errors = []; // assume no errors at first
 
-    if(Number(quantities) != quantities){
+      if(Number(quantities) != quantities){
        errors.push('Not a number!'); 
-    }
-    else {
-      if (quantities < 0) errors.push('Negative value!'); // Check if it is non-negative
-      if (parseInt(quantities) != quantities) errors.push('Not an integer!'); // Check that it is an integer
-    }// Check if string is a number value
+      }
+      else {
+        if (quantities < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if (parseInt(quantities) != quantities) errors.push('Not an integer!'); // Check that it is an integer
+      }// Check if string is a number value
     
-    if (returnErrors) {
+      if (returnErrors) {
         return errors;
-    } else if (errors.length == 0) {
+      } else if (errors.length == 0) {
         return true;
-    } else {
+      } else {
         return false;
+      }
     }
-}
- //Products and price in the row on the table
-function generate_item_rows(array, products){
-    for(let i in products){
-      var itemPrice = products[i].price;
-      if(isNonNegativeInteger(quantities[i])){
-        if(quantities[i] == 0){
-          console.log("zero");
-        } else {
-      document.write(`
-      <tr> 
-            <td width=10%> <img width="30px" height="30px" src=${products[i].image}>
-            <td width="43%">${products[i].name}</td>
-            <td align="center" width="11%">${quantities[i]}</td>
-            <td width="13%">${itemPrice.toFixed(2)}</td>
-            <td width="54%">${extended_price = quantities[i] * itemPrice.toFixed(2)}</td>
-            </tr>`)}
-          }
-            subtotal += extended_price;
-                   
+
+    //Products and price in the row on the table
+    function generate_item_rows(array, products){
+      for(let i in products){
+        var itemPrice = products[i].price;
+        if(isNonNegativeInteger(quantities[i])){
+            if(quantities[i] == 0){
+              console.log("zero");
+            } else {
+              document.write(`
+               <tr>
+                <td width=10%> <img width="30px" height="30px" src=${products[i].image}>
+                <td width="43%">${products[i].name}</td>
+                <td align="center" width="11%">${quantities[i]}</td>
+                <td width="13%">$ ${itemPrice.toFixed(2)}</td>
+                <td width="54%">$ ${extended_price = (quantities[i]) * (itemPrice.toFixed(2))}</td>
+              </tr>`)}
+      }
+      subtotal += extended_price;
     } 
 
-taxes = subtotal * .0575; 
+    taxes = subtotal * .0575; 
     
-if(subtotal < 50){
-  shipping_cost = 2;
-  }
-  else if(subtotal < 100){
-    shipping_cost = 5;
-  }
-  else {
-    shipping_cost = (subtotal * .05);
-  }
-  total = subtotal + taxes + shipping_cost;
- 
-      document.write(`
-      <tr>
-            <td colspan="5" width="100%">&nbsp;</td>
-      </tr>
-      <tr>
-      <td style="text-align: center;" colspan="4" width="67%">Sub-total</td>
-      <td width="54%">$ ${subtotal.toFixed(2)}</td>
-      </tr>
-      <tr>
-      <td style="text-align: center;" colspan="4" width="67%">Taxes</td>
-      <td width="54%">$ ${taxes.toFixed(2)}</td>
-      </tr>
-      <tr>
-      <td style="text-align: center;" colspan="4" width="67%">Shipping</td>
-      <td width="54%">$ ${shipping_cost.toFixed(2)}</td>
-      </tr>
-      <tr>
-      <td style="text-align: center;" colspan="4" width="67%">Total</td>
-      <td width="54%">$ ${total.toFixed(2)}</td>
-    </tr>
-   `)
-}
+    if(subtotal < 50){
+      shipping_cost = 2;
+    }
+    else if(subtotal < 100){
+        shipping_cost = 5;
+    }
+    else {
+        shipping_cost = (subtotal * .05);
+    }
 
-
-</script>
+    total = subtotal + taxes + shipping_cost;
+    
+    document.write(`
+      <tr>
+        <td colspan="5" width="100%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="4" width="67%">Sub-total</td>
+        <td width="54%">$ ${subtotal.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="4" width="67%">Taxes</td>
+        <td width="54%">$ ${taxes.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="4" width="67%">Shipping</td>
+        <td width="54%">$ ${shipping_cost.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="4" width="67%">Total</td>
+        <td width="54%">$ ${total.toFixed(2)}</td>
+      </tr>
+    `)
+    }
+  </script>
 </head>
 <body>
 
   <table border="2">
     <tbody>
+      <th id="title"colspan="5" width="100%"> We Got Balls Invoice</th>
       <tr>
         <th style="text-align: center;" width="10%">Ball type</th>
         <th style="text-align: center;" width="40%">Item</th>
@@ -121,6 +126,10 @@ if(subtotal < 50){
       
     </tbody>
   </table>
-    
+
+  <div id="shipInfo"> 
+    OUR SHIPPING POLICY IS: <br> A subtotal $0 - $49.  99 will be $2 shipping <br> A subtotal $50 - $99.99 will be $5 shipping <br>Subtotals over $100 will be charged 5% of the subtotal amount
+  </div>
+
 </body>
 </html>

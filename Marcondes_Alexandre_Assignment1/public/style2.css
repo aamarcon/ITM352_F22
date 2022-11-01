@@ -1,0 +1,31 @@
+/* ALEXANDRE MARCONDES author
+      Credit for code from class ITM352 -- MR. KAZMAN and PORT 
+*/
+/* CSS helps style the invoce after server validation */
+
+body {
+    text-align: center;
+    margin: 50px 200px;
+    background-image: url("https://thumbs.dreamstime.com/b/20-30-yard-line-american-football-field-20540007.jpg");
+    
+}
+
+table {
+    background: rgba(212, 200, 199, 0.9);
+    border: 15px solid rgba(5, 68, 0, 0.8);
+}
+
+#title{
+    font-size: 2rem;
+    background-size: 48px 48px;
+    text-shadow: 2px 2px 1px rgb(187, 34, 34);
+    background-blend-mode: lighten;
+
+}
+
+#shipInfo {
+    width: 662px;
+    margin: - 250px auto;
+    background: rgba(212, 200, 199, 0.9);
+    border: 15px solid rgba(5, 68, 0, 0.8);
+}

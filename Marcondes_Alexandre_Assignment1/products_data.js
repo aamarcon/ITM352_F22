@@ -1,7 +1,7 @@
 var products =[
     {
     "name" : "Soccer M3-Super-soft",
-    "price" : 111.99,
+    "price" : 111.90,
     "image" : "https://dks.scene7.com/is/image/GolfGalaxy/22ADIUWC2022LG4XXSCB_White_Pantone?qlt=70&wid=600&fmt=pjpeg",
     "onHand" : 20
     },

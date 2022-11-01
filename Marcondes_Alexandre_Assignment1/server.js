@@ -1,3 +1,9 @@
+//ALEXANDRE MARCONDES author
+//Credit for code from class ITM352 -- MR. KAZMAN and PORT
+
+
+
+
 //get express
 var express = require('express');
 // make a variable app became an express object. 
@@ -34,7 +40,7 @@ function isNonNegativeInteger (queryString, returnErrors = false) {
 }
 
  //App all to catch any wrong request. 
- app.all('*', function (request, response, next) {
+app.all('*', function (request, response, next) {
     console.log( request.method + " to " + request.path);
     next();
 });
@@ -64,6 +70,7 @@ app.get('/display.html', function(request, response, next){
 app.post("/purchase", function (request, response) {
     
     //GET QUANTITY FROM USER AND CHECK VALIDITY
+    // Code from line 68 to 73 inspired from a sample Mr. Kazman send me by email. 
     let isNumber = true;
     let buildStringForInvoice = "";
     
@@ -75,10 +82,12 @@ app.post("/purchase", function (request, response) {
             if(isNonNegativeInteger(userQty)){
                 //valid quantity add to order
                 products[i].total_sold += Number(userQty);
+                // check see if enough in stock or onHand
                 if(products[i].total_sold > products[i]["onHand"]){
+                    // Send response that not enough in stock
                     response.send(`You want ${products[i].total_sold} of the ${products[i].name}. We only have ${products[i].onHand} on stock. Please hit the back button to purchase that amount.`)
                 }else {
-                buildStringForInvoice += userKey + '=' +userQty + '&';
+                    buildStringForInvoice += userKey + '=' +userQty + '&';
                 }
             } else {
                 // it is not a number or valid userQty!! ERROR
@@ -89,15 +98,15 @@ app.post("/purchase", function (request, response) {
             isNumber = false;
         }
     }
-        if(!isNumber){
-            // found ERROR back to the page
-            response.redirect('display.html?error=Invalid%20Quantity');
-        }
-        else {
-            // All good create Invoice
-            response.redirect('invoice.html?' + buildStringForInvoice)
+    if(!isNumber){
+        // found ERROR back to the page
+         response.redirect('display.html?error=Invalid%20Quantity');
+    }
+    else {
+        // All good create Invoice
+        response.redirect('invoice.html?' + buildStringForInvoice)
 
-        }
+    }
     
 });
 
