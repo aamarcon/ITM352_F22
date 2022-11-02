@@ -83,11 +83,22 @@ for the SmartPhoneStore.
   
   }
   input {
+
     width: 30px;
     margin-right:160px;
     box-shadow: 4px 3px 2px rgb(187, 34, 34);
   }
   
+h4 span {
+    width: 50px;
+    margin-right:160px;
+    box-shadow: 1px 1px 1px rgb(244, 5, 53);
+    color: rgb(187, 34, 34);
+    font-size: 1rem;
+  }
+
+
+
   #buttonLike {
     display: block;
     width: 150px;

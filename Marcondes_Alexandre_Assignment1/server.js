@@ -2,8 +2,6 @@
 //Credit for code from class ITM352 -- MR. KAZMAN and PORT
 
 
-
-
 //get express
 var express = require('express');
 // make a variable app became an express object. 
@@ -72,14 +70,20 @@ app.post("/purchase", function (request, response) {
     //GET QUANTITY FROM USER AND CHECK VALIDITY
     // Code from line 68 to 73 inspired from a sample Mr. Kazman send me by email. 
     let isNumber = true;
-    let buildStringForInvoice = "";
+
+    let buildStringForInvoice = ""; // this will be the query string I will pass to either invoce if is valid or back to display is there is an ERROR
+
+    let buildStringForError = "";
     
     for (i = 0;  i < products.length; i++){ //check all text boxes
-        var userKey = "postQty" + i;
-        var userQty = request.body[userKey]; // get the value
-
+        var userKey = "postQty" + i; // remember name of KEY is postQty
+        var userQty = request.body[userKey]; // get the value. VALUE IS userQty
+        
+        // if userQty is define enter if loop
         if(typeof userQty != "undefined"){
+            //Here we have something but need to check if userQty is a valid interger. 
             if(isNonNegativeInteger(userQty)){
+
                 //valid quantity add to order
                 products[i].total_sold += Number(userQty);
                 // check see if enough in stock or onHand
@@ -89,22 +93,32 @@ app.post("/purchase", function (request, response) {
                 }else {
                     buildStringForInvoice += userKey + '=' +userQty + '&';
                 }
-            } else {
-                // it is not a number or valid userQty!! ERROR
+            }else {
+                // it is not a number or valid userQty!! ERROR built a ERROR string
                 isNumber = false;
+
+                for(i = 0; i < products.length; i++){
+                    userKey = "postQty" + i; // remember name of KEY is postQty
+                    userQty = request.body[userKey]; // get the value. VALUE IS userQty
+                
+                    buildStringForError += userKey + '=' +userQty + '&';
+                }
+                response.redirect('display.html?' + buildStringForError );
             }
         } else {
             //TYPEOF USERQTY UNDEFINED !!ERROR TEXT NOT FOUND
+            response.send(`display.html?` + buildStringForError)
             isNumber = false;
+
         }
     }
     if(!isNumber){
         // found ERROR back to the page
-         response.redirect('display.html?error=Invalid%20Quantity');
+         response.redirect(`display.html?` + buildStringForError );
     }
     else {
         // All good create Invoice
-        response.redirect('invoice.html?' + buildStringForInvoice)
+        response.redirect(`invoice.html?` + buildStringForInvoice)
 
     }
     

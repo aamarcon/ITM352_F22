@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<!--ALEXANDRE MARCONDES author
+      Credit for code from class ITM352 -- MR. KAZMAN and PORT 
+    -->
+<!--This code displays the products (all the balls) and it is also a form. The form is a method POST and will be evaluated on the server. -->
+   
+    <meta charset="utf-8">
+
+    <title>We Got BALLs</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
+
+    <script type="text/javascript" src="./products_data.js"> </script>
+
+
+    <link rel="stylesheet" href="style1.css">
+</head>
+<!-- Create a post form POST method-->
+<form name="quantity" action="/purchase" method="post">
+    <body>
+    <!--- Used code sample form Port -->
+        <header>
+            <h1>Get Your Game Ball Now</h1>
+        </header>
+        <div>
+            <main>
+                
+                <script>
+            //This creates a display of the products that will be sold.
+            // the loop loops every item in the products_data.js 
+            
+                    for(i in products){
+                        document.write(`
+                        <section class="item">
+                          <h2>${products[i].name}</h2>
+                          <p>$ ${products[i].price}</p>
+                          <img src=${products[i].image}>
+                          <h4>
+                              <label for"quantity${[i]}> Quantity: </label><br>
+                              <input style=display:"block" type="text" name="postQty${[i]}" value="0"><br>
+                          </h4>
+                        </section>
+                    `)}
+                </script>
+
+            </main>
+        </div>
+        <footer>
+            <h1>
+                Best Quality in Town!!!
+            </h1>
+            <p><input type="submit" value="Purchase" id="buttonLike"></p>
+        </footer>
+
+    </body>
+</form>
+
+</html>
