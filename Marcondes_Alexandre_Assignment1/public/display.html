@@ -63,7 +63,7 @@
             }
 
              // make the form sticky...This should only happen if there is an error.
-            for(i = 0; i < errQtyarray.length; i ++){
+             for(i = 0; i < errQtyarray.length; i ++){
             if (params.has(`postQty${i}`)) {
                 quantity[`postQty${i}`].value = params.get(`postQty${i}`);
                 inputBox.innerHTML = quantity[`postQty${i}`].value ;

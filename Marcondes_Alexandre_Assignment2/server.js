@@ -1,7 +1,6 @@
 //ALEXANDRE MARCONDES author
 //Credit for code from class ITM352 -- MR. KAZMAN and PORT
-
-
+//SERVER FOR ASSIGNMENT 2
 
 
 //get express
@@ -73,6 +72,7 @@ app.post("/purchase", function (request, response) {
     // Code from line 68 to 73 inspired from a sample Mr. Kazman send me by email. 
     let isNumber = true;
     let buildStringForInvoice = "";
+    let buildStringForError = "";
     
     for (i = 0;  i < products.length; i++){ //check all text boxes
         var userKey = "postQty" + i;
@@ -90,25 +90,36 @@ app.post("/purchase", function (request, response) {
                     buildStringForInvoice += userKey + '=' +userQty + '&';
                 }
             } else {
-                // it is not a number or valid userQty!! ERROR
-                isNumber = false;
-            }
-        } else {
-            //TYPEOF USERQTY UNDEFINED !!ERROR TEXT NOT FOUND
-            isNumber = false;
-        }
-    }
-    if(!isNumber){
-        // found ERROR back to the page
-        //  response.redirect('display.html?error=Invalid%20Quantity');
-    }
-    else {
-        // All good create Invoice
-        response.redirect('invoice.html?' + buildStringForInvoice)
+                 // it is not a number or valid userQty!! ERROR built a ERROR string
+                 isNumber = false;
 
-    }
-    
-});
+                 for(i = 0; i < products.length; i++){
+                     userKey = "postQty" + i; // remember name of KEY is postQty
+                     userQty = request.body[userKey]; // get the value. VALUE IS userQty
+                 
+                     buildStringForError += userKey + '=' +userQty + '&';
+                 }
+                 response.redirect('display.html?' + buildStringForError );
+             }
+         } else {
+             //TYPEOF USERQTY UNDEFINED !!ERROR TEXT NOT FOUND
+             response.send(`display.html?` + buildStringForError)
+             isNumber = false;
+ 
+         }
+     }
+     if(!isNumber){
+         // found ERROR back to the page
+          response.redirect(`display.html?` + buildStringForError );
+     }
+     else {
+         // All good create Invoice
+         response.redirect(`invoice.html?` + buildStringForInvoice);
+ 
+     }
+     
+ });
+ 
 
 
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback

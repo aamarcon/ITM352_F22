@@ -29,7 +29,10 @@
             
             if (returnErrors) {
                 console.log("RETURN ERRORS");
+
+                console.log(errors);
                 return errors;
+                
             } else if (errors.length == 0) {
                 console.log('ERRORS LENGTH AND TRUE');
                 return true;
@@ -47,32 +50,30 @@
             let input_string = userInput.value;
             let error_array = isNonNegativeInteger(input_string, false);
             if (error_array) {
-                errMessage.innerHTML = "OK";
+                errMessage[index].innerHTML = "";
                 console.log("inside checkQua true part no chnge needed");
             } else {
-                errMessage[index].innerHTML = "Not a Number";
-                console.log("insidecheckagain without a error array value");
+                errMessage[index].innerHTML = "Enter a Number";
+                console.log("inside checkagain without a error array value");
                 }
                 
             }
         
         errQtyarray = []; 
-        let params = (new URL(document.location)).searchParams;
-        let GET = {};
-        params.forEach(function(value, key){
-            GET[key] = value;
-            parseInt(errQtyarray.push(value));
-    });
-
+            let params = (new URL(document.location)).searchParams;
+            let GET = {};
+            params.forEach(function(value, key){
+                GET[key] = value;
+                parseInt(errQtyarray.push(value));
+        });
 
         // make the form sticky...This should only happen if there is an error.
-        // for(i = 0; i < errQtyarray.length; i ++){
-        //     if (params.has(`postQty${i}`)) {
-        //         quantity[`postQty${i}`].value = params.get(`postQty${i}`);
-        //         inputBox.innerHTML = quantity[`postQty${i}`].value ;
-        //     } 
-        // }
-
+        for(i = 0; i < errQtyarray.length; i ++){
+            if (params.has(`postQty${i}`)) {
+                quantity[`postQty${i}`].value = params.get(`postQty${i}`);
+                inputBox.innerHTML = quantity[`postQty${i}`].value ;
+            } 
+        }
 
 
 </script>
@@ -88,7 +89,7 @@
     </header>
 
     <!-- Create a post form POST method-->
-    <form name="quantity" action="/purchase" method="post"></form>
+    <form name="quantity" action="/purchase" method="post">
 
     <!--- Used code sample form Port -->
         <div>
@@ -104,8 +105,8 @@
                           <img src=${products[i].image}>
                           <h4>
                               <label for"quantity${[i]}> Quantity: </label><br>
-                              <input onkeyup="checkQuantityTextbox(this, ${i})"style=display:"block" type="text" name="postQty${i}" value=""><br>
-                              <span id="errMessage"${i}></span>
+                              <input onkeyup="checkQuantityTextbox(this, ${i})"style=display:"block" type="text" name="postQty${i}" value="0"><br>
+                              <span id="errMessage" + ${i}></span>
                           </h4>
                         </section>
                     `)}
