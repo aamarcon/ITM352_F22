@@ -1,0 +1,4 @@
+Shell implements a programming language.
+shell writting scripts to execute other programs.
+Cobol demand banks work on it 
+

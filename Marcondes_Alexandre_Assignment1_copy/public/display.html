@@ -59,3 +59,164 @@
 </form>
 
 </html>
+
+
+
+
+
+
+
+
+
+<!--THIS CODE HAVE A LOT THAT WORKS-->
+<!DOCTYPE html>
+<html>
+
+<head>
+<!--ALEXANDRE MARCONDES author
+      Credit for code from class ITM352 -- MR. KAZMAN and PORT 
+    -->
+<!--This code displays the products (all the balls) and it is also a form. The form is a method POST and will be evaluated on the server. -->
+   
+    <meta charset="utf-8">
+
+    <title>We Got BALLs</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
+
+    <script type="text/javascript" src="./products_data.js"> </script>
+    
+    <script>
+
+        //check if the value is a non-negative interger
+        function isNonNegativeInteger (quantities, returnErrors = false) {
+            errors = []; // assume no errors at first
+
+            if(Number(quantities) != quantities){
+            errors.push('Not a number!'); 
+            }
+            else {
+                if (quantities < 0) errors.push('Negative value!'); // Check if it is non-negative
+                if (parseInt(quantities) != quantities) errors.push('Not an integer!'); // Check that it is an integer
+            }// Check if string is a number value
+            
+            if (returnErrors) {
+                return errors;
+            } else if (errors.length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //gets input from onkeyup and checks value to see if interger
+        function checkQuantityTextbox(userInput) {
+            for(i=0; i< products.length; i++){
+            let input_string = userInput.value;
+            let error_array = isNonNegativeInteger(input_string, true);
+            if (error_array.length == 0) {
+                errMessage.innerHTML = input_string;
+            } else {
+                errMessage.innerHTML = error_array.join("; ");
+            }
+            }
+        }
+
+
+    errQtyarray = []; 
+    
+    let params = (new URL(document.location)).searchParams;
+    let GET = {};
+    params.forEach(function(value, key){
+        GET[key] = value;
+        parseInt(errQtyarray.push(value));
+    });
+        
+        // This function will be called if the user enter a invalid quantity. Make the form sticky and show the mistake. 
+        function redoPageInputError(products) {
+
+            for(i in products){
+                document.write(`
+                    <section class="item">
+                        <h2>${products[i].name}</h2>
+                        <p>$ ${products[i].price}</p>
+                        <img src=${products[i].image}>
+                        <h4>
+                            <label for"quantity${[i]}> Quantity: </label>
+                            <br>
+                            <input onkeyup="" id="inputBox" style=display:"block" type="text" name="postQty${[i]}" value="0"><br>
+                            <span id="errMessage" style=display:"block"></span>
+                            
+                        </h4>
+                    </section>
+                `)
+            }
+
+             // make the form sticky...This should only happen if there is an error.
+            for(i = 0; i < errQtyarray.length; i ++){
+            if (params.has(`postQty${i}`)) {
+                quantity[`postQty${i}`].value = params.get(`postQty${i}`);
+                inputBox.innerHTML = quantity[`postQty${i}`].value ;
+            } 
+        }
+        }
+            
+      
+    </script>
+    
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+
+<!-- Create a post form POST method-->
+<form name="quantity" action="/purchase" method="post">
+
+
+<body>
+
+    <!--- Used code sample form Port -->
+    <header>
+        <h1>Get Your Game Ball Now</h1>
+     </header>
+    <div>
+        <main>
+                
+            <script>
+
+            //This function creates a display of the products that will be sold.
+            // the loop, loops every item in the products_data.js 
+     
+                if(errQtyarray == 0){
+                for(i in products){
+                document.write(`
+                    <section class="item">
+                        <h2>${products[i].name}</h2>
+                        <p>$ ${products[i].price}</p>
+                        <img src=${products[i].image}>
+                        <h4>
+                            <label for"quantity${[i]}"> Quantity: </label><br>
+                            <input id="inputBox" style=display:"block" type="text" name="postQty${[i]}" value="0"  onkeyup="checkQuantityTextbox(this);"> <br>
+                            <span id="errMessage" style=display:"block"></span>
+                        </h4>
+                
+                    </section>
+                `)
+            }
+                }else {
+                    redoPageInputError(products);
+                }
+            </script>
+
+        </main>
+    </div>
+
+    <footer>
+        <h1>
+            Best Quality in Town!!!
+        </h1>
+        <p><input type="submit" value="Purchase" id="buttonLike"></p>
+    </footer>
+
+</body>
+</form>
+</html>
