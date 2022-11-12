@@ -1,0 +1,194 @@
+ /* ALEXANDRE MARCONDES author
+      Credit for code from class ITM352 -- MR. KAZMAN and PORT 
+*/
+/* CSS helps style the display page. 
+Some of the code for h1 and h2 tags 
+comes from a professor PORT example
+for the SmartPhoneStore. 
+
+*/
+
+ 
+
+ /* General */
+ /* <!--- Used code sample form Port --> */
+
+ html {
+    width: 1000;
+    font-family: 'Marker Felt, fantasy', sans-serif;
+    background-color: rgb(82 9 9);
+    font-size: 10px;
+    background-image: url("https://thumbs.dreamstime.com/b/20-30-yard-line-american-football-field-20540007.jpg");
+    
+  }
+  body {
+    width: 800px;
+    margin: 2px auto;
+    background: rgba(212, 200, 199, 0.4);
+  }
+  
+  form {
+    width: 800px;
+    margin: 0 auto;
+  
+  }
+  
+ 
+  /* Typography */
+  
+  
+  h1, h2 {
+    
+    font-family: 'Marker Felt, fantasy';
+    margin: 0;
+    text-align: center;
+  }
+  
+  
+  h1 {
+    font-size: 5rem;
+    background-size: 48px 48px;
+    text-shadow: 2px 2px 1px rgb(187, 34, 34);
+    background-blend-mode: lighten;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 338px;
+    position: absolute;
+    right: 4%;
+    z-index: 3000;
+    text-shadow: 1px 1px 1px rgb(187, 34, 34);
+    line-height: 2rem;
+    padding-top: 0.3rem;
+  }
+  h4 {
+    font-size: 2rem;
+    color: yellow;
+    text-align: right;
+    width: 489px;
+    position: absolute;
+    z-index: 3000;
+    text-shadow: 3px 3px 3px rgb(34, 22, 22);
+    line-height: 2rem;
+    padding-top: 5rem;
+  }
+  h4 label {
+    width: 70px;
+    margin-right:160px;
+    color: rgb(17, 13, 13);
+    text-shadow: 1px 1px 1px rgb(187, 34, 34);
+  
+  }
+  input {
+    width: 30px;
+    margin-right:160px;
+    box-shadow: 4px 3px 2px rgb(187, 34, 34);
+  }
+  
+  #buttonLike {
+    display: block;
+    width: 150px;
+    margin:auto;
+  }
+  
+  p {
+    font-size: 1.5rem;
+  }
+  
+  
+  /* block styling */
+  
+  
+  header, main, footer {
+    padding: 20px;
+  }
+  
+  header {
+    border: 5px solid rgb(5, 68, 0);
+    border-bottom: 0;
+  }
+  
+
+  body > div {
+    border: 5px solid rgb(5, 68, 0);
+    display: flex;
+  }
+  
+  
+  footer {
+    border: 5px solid rgb(5, 68, 0);
+    border-top: 0;
+  }
+  
+  footer h1 {
+    font-style: italic;
+    font-size: 3rem;
+  }
+  
+
+  main {
+    flex: 10;
+  }
+  
+  
+  /*  Form styling */
+
+  
+  main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    border: 5px solid rgb(5, 68, 0);
+  }
+  
+
+  section {
+    width: 45%;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    height: 215px;
+    box-shadow: 1px 1px 1px rgb(187, 34, 34)
+  }
+  
+  section p {
+    color: yellow;
+    background: black;
+    width: 90px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px rgb(187, 34, 34);
+    position: absolute;
+    right: 10px;
+    bottom: -6px;
+    z-index: 2000;
+  }
+  
+  
+  .item {
+    background-size: 234px 24px;
+  }
+  
+  
+  .item img {
+      width: 200px;
+      height: 185px; 
+      padding-left: 13px;
+      display: block;
+      position: absolute;
+      bottom: 3px;
+     
+      
+  }
+
+  #errMessage {
+    display: block;
+    padding-right: 185px;
+    color: red;
+
+  }
