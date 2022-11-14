@@ -15,11 +15,18 @@ var errors = {};
 // make able to file/IO
 var fs = require('fs');
 
+//variable for the people that are register
 var fname = 'registration.json';
 
 var data = fs.readFileSync(fname, "utf8");
 var user_reg_data = JSON.parse(data);
 
+//temporary variable to use after server reboot with the 
+// query URL only. to send to invoice. 
+var temp_string = 'temp_string.txt';
+
+var tempdata = fs.readFileSync(temp_string, "utf8");
+// var built_for_invoce_from_temp_file = (tempdata);
 // use a folder static name public
 app.use(express.static(__dirname + '/public'));
 
@@ -133,7 +140,12 @@ app.post("/purchase", function (request, response) {
 
 
 app.get("/login", function (request, response) {
-
+ // Process login form POST and redirect to logged in page if ok, back to login page if not
+ let params = new URLSearchParams(request.query);
+ let save_query = params.toString();
+ console.log(save_query);
+  //write query to the temp file in case of create account.
+ fs.writeFileSync(temp_string, save_query);
 // Give a simple login form
 str = `
 <body>
@@ -149,8 +161,7 @@ response.send(str);
 });
 
 app.post("/login", function (request, response) {
-    // Process login form POST and redirect to logged in page if ok, back to login page if not
-    let params = new URLSearchParams(request.query);
+   
     //grab username and password and save to a variable.
     the_username = request.body['username'].toLowerCase();
     the_password = request.body['password'];
@@ -159,7 +170,7 @@ app.post("/login", function (request, response) {
         // grab data from user registration and check against password from query
         if (user_reg_data[the_username].password == the_password) {
             // if good sent to invoice and pass params as a string. 
-            response.redirect('invoice.html?' + params.toString());
+            response.redirect('invoice.html?' + save_query);
         } else {
             // if not match tell user wrong password
             response.send(`Wrong password!`);
@@ -199,7 +210,11 @@ app.get("/register", function (request, response) {
 
 
 app.post("/register", function (request, response) {
-         let params = new URLSearchParams(request.query);
+
+        //Get the temp file to use the save the string to a variable. 
+        params = fs.readFileSync(temp_string, "utf8");
+        console.log(params);
+
         // process a simple register form
         username = request.body.username.toLowerCase();
     
@@ -219,7 +234,7 @@ app.post("/register", function (request, response) {
             user_reg_data[username].email = request.body.email;
             fs.writeFileSync(fname, JSON.stringify(user_reg_data));
             console.log("Saved: " + user_reg_data);
-            response.redirect(`invoice?`+ params.toString());
+            response.redirect(`invoice.html?`+ params.toString());
         } else {
             response.redirect("./register");
         }

@@ -1,0 +1,1 @@
+postQty0=1&postQty1=0&postQty2=0&postQty3=0&postQty4=1
