@@ -14,12 +14,13 @@ var errors = {};
 
 // make able to file/IO
 var fs = require('fs');
+const { URLSearchParams } = require('url');
 
 //variable for the people that are register
 var fname = 'registration.json';
 
 var data = fs.readFileSync(fname, "utf8");
-var user_reg_data = JSON.parse(data);
+var user_reg_data = JSON.parse(data);// is a string of all the users on the registration file. 
 
 //temporary variable to use after server reboot with the 
 // query URL only. to send to invoice. 
@@ -33,7 +34,6 @@ app.use(express.static(__dirname + '/public'));
 //use url 
 app.use(express.urlencoded({ extended: true }));
 //Loading the Json file and runing a loop to add product sold to the object.
-
 
 //function to check if it is a positive integer. 
 function isNonNegativeInteger (queryString, returnErrors = false) {
@@ -140,10 +140,12 @@ app.post("/purchase", function (request, response) {
 
 
 app.get("/login", function (request, response) {
+
  // Process login form POST and redirect to logged in page if ok, back to login page if not
- let params = new URLSearchParams(request.query);
- let save_query = params.toString();
+ let x = new URLSearchParams(request.query);
+ let save_query = x.toString();
  console.log(save_query);
+
   //write query to the temp file in case of create account.
  fs.writeFileSync(temp_string, save_query);
 // Give a simple login form
@@ -154,14 +156,15 @@ str = `
 <input type="password" name="password" size="40" placeholder="enter password"><br />
 <input type="submit" value="Submit" id="submit">
 </form>
-<a href='./register'> Click here to register <a/>
+<a href='./register'><button type="button"> Click here to register</button> <a/>
 </body>
     `;
 response.send(str);
 });
 
 app.post("/login", function (request, response) {
-   
+    let params = new URLSearchParams(request.query);
+    let save_query = params.toString();
     //grab username and password and save to a variable.
     the_username = request.body['username'].toLowerCase();
     the_password = request.body['password'];
@@ -169,8 +172,9 @@ app.post("/login", function (request, response) {
     if (typeof user_reg_data[the_username] != 'undefined') {
         // grab data from user registration and check against password from query
         if (user_reg_data[the_username].password == the_password) {
+
             // if good sent to invoice and pass params as a string. 
-            response.redirect('invoice.html?' + save_query);
+            response.redirect('invoice.html?' + save_query + "&" + the_username);
         } else {
             // if not match tell user wrong password
             response.send(`Wrong password!`);
@@ -208,33 +212,36 @@ app.get("/register", function (request, response) {
         
     });
 
-
+// This post is modify code form Assignment 2 webpage
+// Kazman and Ports original code 
 app.post("/register", function (request, response) {
 
         //Get the temp file to use the save the string to a variable. 
         params = fs.readFileSync(temp_string, "utf8");
-        console.log(params);
 
         // process a simple register form
         username = request.body.username.toLowerCase();
     
-        // check is username taken
+        // check is username taken if taken or define put into an error array with key username_taken
         if(typeof user_reg_data[username] != 'undefined') {
             errors['username_taken'] = `Hey! ${username} is already registered!`;
         }
+        // check is password matches if no match put into an error array with key password_mismatch 
         if(request.body.password != request.body.repeat_password) {
             errors['password_mismatch'] = `Repeat password not the same as password!`;
         } 
+        // check if did not enter a user name put on a error object with key no_username. 
         if(request.body.username == '') {
             errors['no_username'] = `You need to select a username!`;
         }
+        // if errors is empty do the following. 
         if(Object.keys(errors).length == 0) {
             user_reg_data[username] = {};
             user_reg_data[username].password = request.body.password;
             user_reg_data[username].email = request.body.email;
             fs.writeFileSync(fname, JSON.stringify(user_reg_data));
-            console.log("Saved: " + user_reg_data);
-            response.redirect(`invoice.html?`+ params.toString());
+    
+            response.redirect(`invoice.html?`+ params.toString() +'&' + username);
         } else {
             response.redirect("./register");
         }

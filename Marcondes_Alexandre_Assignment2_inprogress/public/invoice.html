@@ -20,15 +20,17 @@
     var subtotal = 0; // setting start subtotal to zero
     var shipping_cost = 0; // setting start shipping cost to zero
     var total = 0; //setting start total to zero
-
+    var keysfromParams =[];
     // loop pick the value and adds to the array of quantities. 
     let params = (new URL(document.location)).searchParams;
-      // let GET = {};
+      console.log(params);
       params.forEach(function(value, key){
-        // GET[key] = value;
-        parseInt(quantities.push(value));
+      parseInt(quantities.push(value));
+      keysfromParams.push(key);
+      
         
       });console.log(quantities);
+         console.log(keysfromParams[keysfromParams.length - 1]);
 
 
 
@@ -112,6 +114,12 @@
   </script>
 </head>
 <body>
+  <script>
+
+    document.write(`<h1>Welcome Back ${keysfromParams[keysfromParams.length - 1]} </h1>
+    <h2> <a href="display.html"> <button type="button"> LOGOUT</button> </a></h2>`)
+  </script>
+  
 
   <table border="2">
     <tbody>
