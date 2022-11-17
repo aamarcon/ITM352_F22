@@ -26,7 +26,7 @@ var fregistration = 'registration.json';
 
 var data = fs.readFileSync(fregistration, "utf8");
 var user_reg_data = JSON.parse(data);// is a string of all the users on the registration file. 
-
+console.log(user_reg_data["kazman"].name);
 //temporary variable to use after server reboot with the 
 // query URL only. to send to invoice. 
 var temp_string = 'temp_string.txt';
@@ -159,7 +159,6 @@ app.get("/login", function (request, response) {
  // Process login form POST and redirect to logged in page if ok, back to login page if not
  let x = new URLSearchParams(request.query);
  let save_query = x.toString();
- console.log(save_query);
 
   //write query to the temp file in case of create account.
  fs.writeFileSync(temp_string, save_query);
@@ -183,13 +182,16 @@ app.post("/login", function (request, response) {
     //grab username and password and save to a variable.
     the_username = request.body['username'].toLowerCase();
     the_password = request.body['password'];
+
+    to_verify_password = `password=${the_password}`;
+    to_verify_user = `username=${the_username}`;
     //check to see if the username is define. 
     if (typeof user_reg_data[the_username] != 'undefined') {
         // grab data from user registration and check against password from query
-        if (user_reg_data[the_username].password == the_password) {
+        if (user_reg_data[the_username].password == the_password){
 
             // if good sent to invoice and pass params as a string. 
-            response.redirect('invoice.html?' + save_query + "&" + the_username);
+            response.redirect('success?' + params.toString() + '&' + to_verify_user );
         } else {
             // if not match tell user wrong password
             response.send(`Wrong password!`);
@@ -208,7 +210,7 @@ app.get("/register", function (request, response) {
     // Give a simple register form
     str = `
     <body> 
-    <form action="success_login" method="POST">
+    <form action="" method="POST">
     <input type="text" name="username" size="40" placeholder="enter username" > 
     ${ (typeof errors['no_username'] != 'undefined')?errors['no_username']:''}
     ${ (typeof errors['username_taken'] != 'undefined')?errors['username_taken']:''}
@@ -263,9 +265,17 @@ app.post("/register", function (request, response) {
         }
     });
 
-app.get("success_login", function(request, response){
-        
-        `<body>hello</body>`
+app.get("/success", function(request, response){
+    create_log_in_group = [];
+    
+    string_query = new URLSearchParams(request.query);
+    console.log(string_query);
+    string_query.forEach(function(value, key){
+    create_log_in_group.push(key);
+    })
+    console.log(create_log_in_group);
+    
+    //check if the user is on registration
 
     });
 

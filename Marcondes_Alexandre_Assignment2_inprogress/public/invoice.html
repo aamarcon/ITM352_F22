@@ -116,8 +116,11 @@
 <body>
   <script>
 
-    document.write(`<h1>Welcome Back ${keysfromParams[keysfromParams.length - 1]} </h1>
-    <h2> <a href="display.html"> <button type="button"> LOGOUT</button> </a></h2>`)
+    document.write(`<h1>Welcome Back ${quantities[quantities.length - 1]} </h1>
+
+    <form name="./logout" action="logout" method="POST"> 
+      <input type="submit" value="LOGOUT">
+  </form>`)
   </script>
   
 

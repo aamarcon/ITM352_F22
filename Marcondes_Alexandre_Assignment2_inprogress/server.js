@@ -2,12 +2,7 @@
 //Credit for code from class ITM352 -- MR. KAZMAN and PORT
 //SERVER FOR ASSIGNMENT 2
 
-//-----------------------FUNCTIONS ---------------------
 
-function loggedUsers(user, password, email){
-
-}
-//------------------------END FUNCTIONS ----------------
 //get express
 var express = require('express');
 // make a variable app became an express object. 
@@ -19,6 +14,7 @@ var errors = {};
 
 // make able to file/IO
 var fs = require('fs');
+const { Server } = require('http');
 const { URLSearchParams } = require('url');
 
 //variable for the people that are register
@@ -31,22 +27,11 @@ var user_reg_data = JSON.parse(data);// is a string of all the users on the regi
 // query URL only. to send to invoice. 
 var temp_string = 'temp_string.txt';
 
+
 var tempdata = fs.readFileSync(temp_string, "utf8");
-// var built_for_invoce_from_temp_file = (tempdata);
-// use a folder static name public
-
-// read file of users that are logged in to variable
-var flogged_users = "logged_users.json";
-console.log(flogged_users);
-// assigned the file to a variable
-var users_data = fs.readFileSync(flogged_users, 'utf8');
-console.log(users_data);
-
-//parse the object to a variable.
-var users_object_logged = JSON.parse(users_data);
-console.log(users_object_logged);
 
 
+// use a public directory shortcut
 app.use(express.static(__dirname + '/public'));
 
 //use url 
@@ -96,7 +81,6 @@ products.forEach( (prod,i) => {prod.total_sold = 0});
 
 //listening to a diplay.html request mine Index.html is display.html
 app.get('/display.html', function(request, response, next){
-    console.log("Just got the file display.html");
     next();
 });
 
@@ -158,11 +142,11 @@ app.post("/purchase", function (request, response) {
 app.get("/login", function (request, response) {
 
  // Process login form POST and redirect to logged in page if ok, back to login page if not
- let x = new URLSearchParams(request.query);
- let save_query = x.toString();
- console.log(save_query);
-
+ let user_query = new URLSearchParams(request.query);
+ let save_query = user_query.toString();
+ 
   //write query to the temp file in case of create account.
+  // because when you create the account the query goes away
  fs.writeFileSync(temp_string, save_query);
 // Give a simple login form
 str = `
@@ -184,11 +168,14 @@ app.post("/login", function (request, response) {
     //grab username and password and save to a variable.
     the_username = request.body['username'].toLowerCase();
     the_password = request.body['password'];
+
     //check to see if the username is define. 
     if (typeof user_reg_data[the_username] != 'undefined') {
         // grab data from user registration and check against password from query
         if (user_reg_data[the_username].password == the_password) {
 
+            //create key value in the string with username
+            the_username = `username=${the_username}`;
             // if good sent to invoice and pass params as a string. 
             response.redirect('invoice.html?' + save_query + "&" + the_username);
         } else {
@@ -232,7 +219,7 @@ app.get("/register", function (request, response) {
 // Kazman and Ports original code 
 app.post("/register", function (request, response) {
 
-        //Get the temp file to use the save the string to a variable. 
+        //Get the temp file to use to save the string to a variable. 
         params = fs.readFileSync(temp_string, "utf8");
 
         // process a simple register form
@@ -257,11 +244,19 @@ app.post("/register", function (request, response) {
             user_reg_data[username].password = request.body.password;
             user_reg_data[username].email = request.body.email;
             fs.writeFileSync(fregistration, JSON.stringify(user_reg_data));
-    
-            response.redirect(`invoice.html?`+ params.toString() +'&' + username);
+            
+            the_username = `username=${username}`;
+
+            response.redirect(`invoice.html?`+ params.toString() +'&' + the_username);
         } else {
             response.redirect("./register");
         }
     });
+
+app.post("/logout", function(request, response){
+    fs.writeFileSync("temp_string.txt", JSON.stringify(""));
+    response.redirect("display.html");
+
+});
 
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
