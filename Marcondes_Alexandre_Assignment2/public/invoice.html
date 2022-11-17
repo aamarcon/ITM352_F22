@@ -20,14 +20,18 @@
     var subtotal = 0; // setting start subtotal to zero
     var shipping_cost = 0; // setting start shipping cost to zero
     var total = 0; //setting start total to zero
-
+    var keysfromParams =[];
     // loop pick the value and adds to the array of quantities. 
     let params = (new URL(document.location)).searchParams;
-      let GET = {};
+      console.log(params);
       params.forEach(function(value, key){
-        GET[key] = value;
-        parseInt(quantities.push(value));
-      });
+      parseInt(quantities.push(value));
+      keysfromParams.push(key);
+      
+        
+      });console.log(quantities);
+         console.log(keysfromParams[keysfromParams.length - 1]);
+
 
 
     //check if the value is a non-negative interger
@@ -55,9 +59,9 @@
     function generate_item_rows(array, products){
       for(let i in products){
         var itemPrice = products[i].price;
-        if(isNonNegativeInteger(quantities[i])){
             if(quantities[i] == 0){
-              console.log("zero");
+              continue;
+              console.log(" CAN SEE ME")
             } else {
               document.write(`
                <tr>
@@ -66,11 +70,11 @@
                 <td align="center" width="11%">${quantities[i]}</td>
                 <td width="13%">$ ${itemPrice.toFixed(2)}</td>
                 <td width="54%">$ ${extended_price = (quantities[i]) * (itemPrice.toFixed(2))}</td>
-              </tr>`)}
-      }
-      subtotal += extended_price;
-    } 
-
+              </tr>`)
+              subtotal += extended_price;
+            }     
+      } 
+   
     taxes = subtotal * .0575; 
     
     if(subtotal < 50){
@@ -110,6 +114,15 @@
   </script>
 </head>
 <body>
+  <script>
+
+    document.write(`<h1>Welcome Back ${quantities[quantities.length - 1]} </h1>
+
+    <form name="./logout" action="logout" method="POST"> 
+      <input type="submit" value="LOGOUT">
+  </form>`)
+  </script>
+  
 
   <table border="2">
     <tbody>

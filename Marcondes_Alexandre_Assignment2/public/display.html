@@ -62,25 +62,13 @@
               // make the form sticky...This should only happen if there is an error.
        
         
-        errQtyarray = []; //postQty0=a&postQty1=2&postQty2=2&postQty3=2&postQty4=2&
+        errQtyarray = [];
             let params = (new URL(document.location)).searchParams;
             let GET = {};
             params.forEach(function(value, key){
                 GET[key] = value;
                 parseInt(errQtyarray.push(value));
         });
-
-        console.log(errQtyarray);
-        // check to see if errors
-        
-        
-        //     //if (params.has(`postQty${i}`)) {
-        //         quantity[`postQty${i}`].value = params.get(`postQty${i}`);
-        //         inputBox.innerHTML = quantity[`postQty${i}`].value ;
-        //     } 
-        // //}
-
-      
 
 </script>
 
@@ -112,7 +100,7 @@
                           <h4>
                               <label for"quantity${[i]}> Quantity: </label><br>
                               <input onkeyup="checkQuantityTextbox(this, ${i})"style=display:"block" type="text" name="postQty${i}" id="test${i}"
-                              value=""><br>
+                              value="0"><br>
                               <span id="errMessage" + ${i}></span>
                           </h4>
                         </section>
@@ -126,10 +114,8 @@
                
                 console.log(errMessage);
             if(errQtyarray){
-                console.log(errQtyarray[i]);
             document.getElementById('test'+ i).value = errQtyarray[i];
             if(isNonNegativeInteger(errQtyarray[i]) != true ){
-                console.log("GOT HERE");
                 errMessage[i].innerHTML = "Enter a Number";
             }
         }
