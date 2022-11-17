@@ -1,9 +1,6 @@
 //ALEXANDRE MARCONDES author
 //Credit for code from class ITM352 -- MR. KAZMAN and PORT
 
-
-
-
 //get express
 var express = require('express');
 // make a variable app became an express object. 
@@ -17,6 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 
 //Loading the Json file and runing a loop to add product sold to the object.
 
+// css for the loggin and register
+
+app.use('/css', express.static(__dirname + '/public'));
 
 //function to check if it is a positive integer. 
 function isNonNegativeInteger (queryString, returnErrors = false) {

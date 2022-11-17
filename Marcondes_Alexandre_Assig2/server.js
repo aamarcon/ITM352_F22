@@ -96,7 +96,6 @@ products.forEach( (prod,i) => {prod.total_sold = 0});
 
 //listening to a diplay.html request mine Index.html is display.html
 app.get('/display.html', function(request, response, next){
-    console.log("Just got the file display.html");
     next();
 });
 
@@ -209,7 +208,7 @@ app.get("/register", function (request, response) {
     // Give a simple register form
     str = `
     <body> 
-    <form action="" method="POST">
+    <form action="success_login" method="POST">
     <input type="text" name="username" size="40" placeholder="enter username" > 
     ${ (typeof errors['no_username'] != 'undefined')?errors['no_username']:''}
     ${ (typeof errors['username_taken'] != 'undefined')?errors['username_taken']:''}
@@ -258,10 +257,18 @@ app.post("/register", function (request, response) {
             user_reg_data[username].email = request.body.email;
             fs.writeFileSync(fregistration, JSON.stringify(user_reg_data));
     
-            response.redirect(`invoice.html?`+ params.toString() +'&' + username);
+            response.redirect(`invoice.html?`+ params.toString());
         } else {
             response.redirect("./register");
         }
     });
+
+app.get("success_login", function(request, response){
+        
+        `<body>hello</body>`
+
+    });
+
+
 
 app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here to do a callback
