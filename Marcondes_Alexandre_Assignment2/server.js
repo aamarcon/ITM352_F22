@@ -23,6 +23,7 @@ var fregistration = 'registration.json';
 var data = fs.readFileSync(fregistration, "utf8");
 var user_reg_data = JSON.parse(data);// is a string of all the users on the registration file. 
 
+console.log(user_reg_data);
 //temporary variable to use after server reboot with the 
 // query URL only. to send to invoice. 
 var temp_string = 'temp_string.txt';
@@ -133,6 +134,7 @@ app.post("/purchase", function (request, response) {
         //  response.redirect(`invoice.html?` + buildStringForInvoice);
     }
 });
+
 
 
 app.get("/login", function (request, response) {
