@@ -1,12 +1,16 @@
-var fs = require('fs');
-	
-	var fileName = 'user_data.json';
-	
-var iffile = fs.existsSync(fileName);
-    console.log(iffile); // will get a boolean true or false. 
-	if(iffile) {
-    var dataBeingRead = fs.readFileSync('./user_data.json', 'utf-8');
-	var users_reg_data = JSON.parse(dataBeingRead);
-	console.log(users_reg_data);	
-	}
 
+var fs = require('fs');
+
+var fname = "user_data.json";
+
+if (fs.existsSync(fname)) {
+    var data = fs.readFileSync(fname, 'utf-8');
+    
+    var status = fs.statSync(fname);
+    console.log("The file is " + status.size + " bytes");
+
+    var users = JSON.parse(data);
+    console.log(users);
+} else {
+    console.log("Sorry file " + fname + " does not exist.");
+}

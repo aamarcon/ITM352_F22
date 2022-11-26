@@ -1,4 +1,10 @@
-var users_reg_data = require("./user_data.json");
-console.log(users_reg_data);
+var users = require("./user_data.json");
+console.log(users);
+var fs = require('fs');
 
-console.log(users_reg_data.kazman.password);
+var fname = "user_data.json";
+
+var data = fs.readFileSync(fname, 'utf-8');
+var users = JSON.parse(data);
+console.log(data);
+console.log(users);
